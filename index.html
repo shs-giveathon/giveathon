@@ -1,1 +1,64 @@
 <!-- this will eventually be the landing page -->
+<html>
+    <head>
+        <style>
+            :root {
+	            --white: #F1FAEE;
+                --aqua: #A8DADC;
+                --light-blue: #457B9D;
+                --dark-blue: #1D3557;
+                --darkest-blue: #0C113B;
+                --red-accent: #E63946;
+            }
+
+            body{
+                margin:0px; 
+                padding: 0px;
+            }
+
+            .header{
+                width: 100%;
+                background-color: var(--aqua);
+                text-align: left;
+            }
+            .placeholder{
+                margin: 0px;
+                padding: 10px;
+            }
+            .body{
+                width: 100%;
+                background-color: var(--white);
+            }
+
+            .footer{
+                width: 100%;
+                background-color: var(--aqua);
+            }
+
+            /* tablets, computers */
+            @media only screen and (min-aspect-ratio: 4/3){
+                .header{
+                    aspect-ratio: 30/1;
+                }
+                
+                .body{
+                    aspect-ratio: 4/3;
+	            }
+	
+                .footer{
+                    aspect-ratio: 35/1;
+                }
+            }
+
+            /* mobile */
+            @media only screen and (max-aspect-ratio:4/3){
+                .header{
+                    aspect-ratio: 20/1;
+                }
+            }
+        </style>
+    </head>
+    <body>
+
+    </body>
+</html>
