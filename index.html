@@ -3,7 +3,7 @@
     <head>
         <style>
             :root {
-	            --white: #F1FAEE;
+                --white: #F1FAEE;
                 --aqua: #A8DADC;
                 --light-blue: #457B9D;
                 --dark-blue: #1D3557;
@@ -12,53 +12,218 @@
             }
 
             body{
-                margin:0px; 
+                margin: 0px; 
                 padding: 0px;
             }
 
             .header{
+                z-index: 1;
+                position: relative;
                 width: 100%;
                 background-color: var(--dark-blue);
                 text-align: left;
+                box-shadow: 0px 4px 10px rgb(0,0,0,0.15);
             }
             .placeholder{
                 margin: 0px;
                 padding: 10px;
+                color: var(--darkest-blue);
             }
             .body{
                 width: 100%;
                 background-color: var(--white);
+                position: relative;
             }
 
             .footer{
                 width: 100%;
                 background-color: var(--dark-blue);
+                z-index: 1;
+                position: relative;
+                box-shadow: 0px -3px 10px rgb(0,0,0,0.15);
+            }
+
+            .about{
+                width: 90%;
+                margin-left: 5%;
+                border-radius: 20px;
+                box-shadow: -6px -6px 10px white, 6px 6px 20px rgba(0,0,0,0.1);
+            }
+
+            .signups{
+                width: 90%;
+                margin-left: 5%;
+                margin-top: 5%;
+                border-radius: 20px;
+                box-shadow: -6px -6px 10px white, 6px 6px 20px rgba(0,0,0,0.1);
+            }
+
+            .extra{
+                width: 90%;
+                margin-left: 5%;
+                border-radius: 20px;
+                box-shadow: -6px -6px 10px white, 6px 6px 20px rgba(0,0,0,0.1);
+            }
+
+            .board{
+                width: 90%;
+                margin-left: 5%;
+                height: 93%;
+                border-radius: 20px;
+                box-shadow: -6px -6px 10px white, 6px 6px 20px rgba(0,0,0,0.1);
+            }
+
+            .forum{
+                width: 90%;
+                margin-left: 5%;
+                height: 93%;
+                border-radius: 20px;
+                box-shadow: -6px -6px 10px white, 6px 6px 20px rgba(0,0,0,0.1);
             }
 
             /* tablets, computers */
             @media only screen and (min-aspect-ratio: 4/3){
                 .header{
-                    aspect-ratio: 30/1;
+                    aspect-ratio: 20/1;
                 }
                 
                 .body{
                     aspect-ratio: 4/3;
-	            }
-	
-                .footer{
-                    aspect-ratio: 35/1;
                 }
+                
+                .footer{
+                    aspect-ratio: 20/1;
+                }
+                
+                .col1{
+                    width: 30%;
+                    height: 100%;
+                    margin-left: 3%;
+                    position: absolute;
+                }
+
+                .col2{
+                    width: 30%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0px;
+                    margin-left: 35%;
+                }
+
+                .col3{
+                    width: 30%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0px;
+                    margin-left: 67%;
+                    margin-right: 3%;
+                }
+
+                .about{
+                    height: 25%;
+                }
+                
+
+                .signups{
+                    height: 25%;
+                }
+
+                .extra{
+                    height: 36%;
+                    margin-top: 8%;
+                }
+
+                .board{
+                    margin-top: 8%;
+                }
+
+                .forum{
+                    margin-top: 8%;
+                }
+
+                
             }
 
             /* mobile */
-            @media only screen and (max-aspect-ratio:4/3){
+            @media only screen and (max-aspect-ratio: 4/3){
                 .header{
-                    aspect-ratio: 20/1;
+                    aspect-ratio: 30/1;
+                    /*background-color: var(--red-accent);*/
+                }
+                
+                .body{
+                    aspect-ratio: 1/2;
+                }
+                
+                .footer{
+                    aspect-ratio: 30/1;
+                }
+                .col1{
+                    width: 90%;
+                    height: 40%;
+                    margin-left: 5%;
+                padding-top: 5%;
+                }	
+
+                .col2{
+                    width: 90%;
+                    height: 40%;
+                    margin-left: 5%;
+                    position: relative;
+                }
+
+                .col3{
+                    width: 90%;
+                    height: 40%;
+                    margin-left: 5%;
+                    position: relative;
+                }
+                
+                .about{
+                    height: 20%;
+                }
+
+                .signups{
+                    height: 20%;
+                }
+
+                .extra{
+                    height: 45%;
+                    margin-top: 5%;
+                }
+                
+                .board{
+                    margin-top: 5%;
+                }
+
+                .forum{
+                    margin-top: 0%;
                 }
             }
         </style>
     </head>
     <body>
+
+        <div class = "header"> <p class="placeholder"> giveathon.co (temp) </p> </div>
+
+        <div class = "body">
+            
+            <div class = "col1">
+                <div class = "about"> <p class="placeholder"> about (temp) </p> </div>
+                <div class = "signups"> <p class="placeholder"> sign up, login (temp) </p> </div>
+                <div class = "extra"> <p class="placeholder"> extra, idk yet </p></div>
+            </div>
+            
+            <div class = "col2">
+                <div class = "board"><p class="placeholder"> leaderboard (temp) </p>  </div>
+            </div>
+            <div class = "col3">
+                <div class = "forum"> <p class="placeholder"> forum (temp) </p> </div>
+            </div>
+
+        </div>
+
+        <div class = "footer"> <p class="placeholder"> giveathon.co (temp) </p> </div>
 
     </body>
 </html>
