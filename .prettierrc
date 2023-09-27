@@ -1,0 +1,8 @@
+{
+  "arrowParens": "avoid",
+  "proseWrap": "never",
+  "printWidth": 175,
+  "trailingComma": "none",
+  "singleQuote": true,
+  "jsxSingleQuote": true
+}
