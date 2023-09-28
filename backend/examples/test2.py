@@ -68,12 +68,4 @@ class DataStore:
             else:
                 self.affiliation_cache[affiliation] = float(row["Money Raised"])
 
-        self.student_cache = dict(
-            sorted(
-                self.student_cache,
-                key=lambda item: item[1]["Money Raised"],
-                reverse=True,
-            )
-        )
-
-    def get
+        # TODO: sort the dictionary
