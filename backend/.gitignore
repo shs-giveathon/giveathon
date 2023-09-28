@@ -21,3 +21,6 @@ instance/
 # Dependency directories
 venv/
 env/
+
+# Private files
+serviceAccount.json
