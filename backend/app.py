@@ -24,26 +24,34 @@ datastore = DataStore(moneyWorksheet, registrationWorksheet, 1)
 
 @app.route("/getTopPeople", methods=["GET"])
 def index():
-    json = request.get_json()
-    if json.get("peopleCount") is not None:
-        people_count = int(json["peopleCount"])
-    else:
-        people_count = 10
+    # Set the default parameters
+    limit = 10
 
-    data = datastore.get_top_students(people_count)
+    try:
+        json = request.get_json()
+    except:
+        json = {}
+    if json.get("limit") is not None:
+        limit = int(json["limit"])
+
+    data = datastore.get_top_students(limit)
 
     return jsonify(data)
 
 
 @app.route("/getTopAffiliations", methods=["GET"])
 def affIndex():
-    json = request.get_json()
-    if json.get("affiliationsCount") is not None:
-        affiliations_count = int(json["affiliationsCount"])
-    else:
-        affiliations_count = 10
+    # Set the default parameters
+    limit = 10
 
-    data = datastore.get_top_affiliations(affiliations_count)
+    try:
+        json = request.get_json()
+    except:
+        json = {}
+    if json.get("limit") is not None:
+        limit = int(json["limit"])
+
+    data = datastore.get_top_affiliations(limit)
 
     return jsonify(data)
 
