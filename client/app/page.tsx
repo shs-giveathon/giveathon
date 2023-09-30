@@ -1,26 +1,18 @@
-import { LeaderboardRow, LeaderboardRowProps } from '@/components/leaderboard-row';
-import { NextPage } from 'next';
+'use client';
 
-const Home: NextPage = async () => {
-  // TODO switch to api
-  const filler: Omit<LeaderboardRowProps, 'rank'>[] = [
-    {
-      name: 'a',
-      moneyRaised: 20
-    },
-    {
-      name: 'b',
-      moneyRaised: 10
-    },
-    {
-      name: 'c',
-      moneyRaised: 5
-    },
-    {
-      name: 'd',
-      moneyRaised: 0
-    }
-  ];
+import { LeaderboardRow } from '@/components/leaderboard-row';
+import { NextPage } from 'next';
+import { useEffect, useState } from 'react';
+
+const Home: NextPage = () => {
+  // TODO switch to ssr
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetch('http://localhost:5000/getTopPeople')
+      .then(response => response.json())
+      .then(data => setData(data))
+      .catch(error => console.error('Error:', error));
+  }, []);
 
   return (
     <>
@@ -53,9 +45,7 @@ const Home: NextPage = async () => {
             <h1>Name</h1>
           </div>
         </div>
-        {filler.map((fill, index) => (
-          <LeaderboardRow name={fill.name} moneyRaised={fill.moneyRaised} rank={index} />
-        ))}
+        {data && data.map((data, index) => <LeaderboardRow name={data[0]} moneyRaised={data[1]} rank={index} key={index} />)}
       </div>
     </>
   );
