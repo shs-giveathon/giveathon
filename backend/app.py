@@ -1,9 +1,12 @@
 from DataStore import DataStore
 from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
 from google.oauth2.service_account import Credentials
 from gspread import authorize
 
+# Set up the Flask app
 app = Flask(__name__)
+cors = CORS(app, origins=["*"])
 
 # Set up the connection to Google Sheets
 scopes = [
@@ -23,6 +26,7 @@ datastore = DataStore(moneyWorksheet, registrationWorksheet, 1)
 
 
 @app.route("/getTopPeople", methods=["GET"])
+@cross_origin()
 def index():
     # Set the default parameters
     limit = 10
