@@ -18,8 +18,8 @@ gc = authorize(creds)
 sh = gc.open_by_url(
     "https://docs.google.com/spreadsheets/d/16Hnls_-qXFapfP3n-qeKCwWWQzD-1ftP05V0svHS70k/edit?usp=sharing"
 )
-moneyWorksheet = sh.worksheet("MoneyData")
-registrationWorksheet = sh.worksheet("RegistrationData")
+moneyWorksheet = sh.worksheet("MoneyForm")
+registrationWorksheet = sh.worksheet("RegistrationForm")
 print("Successfully connected to the spreadsheet!")
 
 datastore = DataStore(moneyWorksheet, registrationWorksheet, 1)
