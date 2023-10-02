@@ -38,7 +38,10 @@ def index():
     if json.get("limit") is not None:
         limit = int(json["limit"])
 
-    data = datastore.get_top_students(limit)
+    try:
+        data = datastore.get_top_students(limit)
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
     return jsonify(data)
 
@@ -55,7 +58,10 @@ def affIndex():
     if json.get("limit") is not None:
         limit = int(json["limit"])
 
-    data = datastore.get_top_affiliations(limit)
+    try:
+        data = datastore.get_top_affiliations(limit)
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
     return jsonify(data)
 

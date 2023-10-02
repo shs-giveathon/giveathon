@@ -2,7 +2,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Dict, List, Tuple
 
-from gspread import Worksheet
+from gspread import Worksheet, exceptions
 
 
 class DataStore:
@@ -33,7 +33,16 @@ class DataStore:
 
         # Create a dictionary for registered emails for faster look-up
         registered_emails: Dict[str, Dict[str, str]] = {}
-        for registered_row in self.reg_sheet.get_all_records():
+        
+        try:
+            records = self.reg_sheet.get_all_records()
+        except exceptions.APIError as e:
+            if e.response.status_code == 403:
+                raise Exception("Permission denied to access registration sheet. Please make sure you have access to the sheet.") from e
+            else:
+                raise e
+            
+        for registered_row in records:
             email = registered_row["Email"]
             if email not in registered_emails:
                 # If the affiliation is with a class, then it will be "{teacher name}'s {period number} Period"
