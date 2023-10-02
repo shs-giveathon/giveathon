@@ -3,7 +3,7 @@ import unittest
 import requests
 
 
-class TestApp(unittest.TestCase):
+class RequestTests(unittest.TestCase):
     def test_get_top_affiliations(self):
         url = "http://localhost:5000/getTopAffiliations"
         response = requests.get(url)
