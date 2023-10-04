@@ -104,6 +104,62 @@ class DataStore:
         self.try_updating_cache()
         return self.affiliation_cache[:how_many]
 
+    def get_info_by_email(self, email: str) -> Dict[str, any]:
+        """
+        Gets a detailed history of money raised by the given email,
+        along with their affiliation and other details.
+
+        Args:
+        - email (str): The email of the student/affiliation.
+
+        Returns:
+        - dict: A dictionary containing name, affiliation, and a history of money raised with timestamps.
+        """
+        # Check for a valid email
+        if "@" not in email:
+            raise ValueError("Invalid email provided.")
+
+        # Fetch all records from the registration sheet
+        try:
+            reg_records = self.reg_sheet.get_all_records()
+        except exceptions.APIError as e:
+            if e.response.status_code == 403:
+                raise Exception(
+                    "Permission denied to access registration sheet. Please make sure you have access to the sheet."
+                ) from e
+            raise
+
+        # Search for the user's registration info
+        user_info = next(
+            (record for record in reg_records if record.get("Email") == email),
+            None,
+        )
+
+        # If the user is not found in the registration records
+        if not user_info:
+            raise ValueError("Email not found in registration records.")
+
+        affiliation = self._get_affiliation_from_row(user_info)  # type: ignore
+        name = user_info.get("Name")
+
+        # Fetch all records from the money sheet
+        money_records = self.money_sheet.get_all_records()
+
+        # Extract the user's money raising history
+        history = [
+            (record.get("Timestamp"), float(record.get("Money Raised")))
+            for record in money_records
+            if record.get("Email") == email
+            and record.get("Money Raised")
+            and str(record.get("Money Raised")).replace(".", "", 1).isdigit()
+        ]
+
+        return {
+            "Name": name,
+            "Affiliation": affiliation,
+            "History": history,
+        }
+
     def get_cache(self):
         self.try_updating_cache()
         return {

@@ -67,7 +67,24 @@ def affIndex():
     return jsonify(data)
 
 
-@app.route('/debug', methods=["GET"])
+@app.route("/getInfoByEmail", methods=["GET"])
+@cross_origin()
+def getInfoByEmail():
+    try:
+        json = request.get_json()
+    except:
+        json = {}
+    email = json.get("email")
+    if email is None:
+        return jsonify({"error": "No email provided."})
+    try:
+        data = datastore.get_info_by_email(email)
+    except Exception as e:
+        return jsonify({"error": str(e)})
+    return jsonify(data)
+
+
+@app.route("/debug", methods=["GET"])
 def debug():
     return jsonify(datastore.get_cache())
 
