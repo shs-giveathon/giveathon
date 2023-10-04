@@ -11,14 +11,13 @@ import loadingSpinner from '@/public/spinner.svg';
 const Home: NextPage = () => {
   const apiUrl = getApiUrl();
 
-  // TODO switch to ssr
   const [data, setData] = useState<any[][] | null>(null);
 
   useEffect(() => {
     fetch(`${apiUrl}/getTopPeople`)
       .then(response => response.json())
       .then(data => setData(data))
-      .catch(error => console.error('Error:', error));
+      .catch(err => console.error('Error:', err));
   }, []);
 
   if (!data)
