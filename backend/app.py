@@ -47,6 +47,7 @@ def index():
 
 
 @app.route("/getTopAffiliations", methods=["GET"])
+@cross_origin()
 def affIndex():
     # Set the default parameters
     limit = 10
