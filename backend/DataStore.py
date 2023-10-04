@@ -130,3 +130,10 @@ class DataStore:
     def get_top_affiliations(self, how_many: int) -> List[Tuple[str, float]]:
         self.try_updating_cache()
         return self.affiliation_cache[:how_many]
+
+    def get_cache(self):
+        self.try_updating_cache()
+        return {
+            "student_cache": self.student_cache,
+            "affiliation_cache": self.affiliation_cache,
+        }

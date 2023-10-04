@@ -67,5 +67,10 @@ def affIndex():
     return jsonify(data)
 
 
+@app.route('/debug', methods=["GET"])
+def debug():
+    return jsonify(datastore.get_cache())
+
+
 if __name__ == "__main__":
     app.run(debug=True)
