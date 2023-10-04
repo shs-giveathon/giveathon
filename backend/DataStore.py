@@ -1,5 +1,5 @@
+from collections import defaultdict
 from datetime import datetime
-from enum import Enum
 from typing import Dict, List, Tuple
 
 from gspread import Worksheet, exceptions
@@ -8,12 +8,8 @@ from gspread import Worksheet, exceptions
 class DataStore:
     money_sheet: Worksheet
     reg_sheet: Worksheet
-
-    # (full name, total_raised), is sorted
     affiliation_cache: List[Tuple[str, float]]
-    # (affiliation, total_raised), is sorted
     student_cache: List[Tuple[str, float]]
-
     cache_ttl: int
     last_cache_update: datetime
 
@@ -23,15 +19,13 @@ class DataStore:
         self.affiliation_cache = []
         self.student_cache = []
         self.cache_ttl = cache_ttl
-
+        self.last_cache_update = datetime.min
         self.update_cache()
-        self.last_cache_update = datetime.now()
 
     def update_cache(self) -> None:
-        self.affiliation_cache = []
-        self.student_cache = []
+        self.affiliation_cache.clear()
+        self.student_cache.clear()
 
-        # Create a dictionary for registered emails for faster look-up
         registered_emails: Dict[str, Dict[str, str]] = {}
 
         try:
@@ -41,83 +35,62 @@ class DataStore:
                 raise Exception(
                     "Permission denied to access registration sheet. Please make sure you have access to the sheet."
                 ) from e
-            else:
-                raise e
+            raise
 
         for registered_row in records:
-            email = registered_row["Email"]
-            if email not in registered_emails:
-                # If the affiliation is with a class, then it will be "{teacher name}'s {period number} Period"
-                # Otherwise, its just "{club_name}"
-                if (
-                    registered_row["Teacher"] != "N/A"
-                    and registered_row["Period"] != "N/A"
-                ):
-                    affiliation = (
-                        str(registered_row["Teacher"])
-                        + "'s "
-                        + str(registered_row["Period"])
-                        + " Period"
-                    )
-                elif registered_row["Club"] != "N/A":
-                    affiliation = registered_row["Club"]
-                else:
-                    continue
-                    # you registered wrongly
+            email = registered_row.get("Email")
+            if not email:
+                continue
 
-                registered_emails[email] = {  # type: ignore
-                    "Name": registered_row["Name"],
-                    "Affiliation": affiliation,
-                }
+            affiliation = self._get_affiliation_from_row(registered_row)  # type: ignore
+            if not affiliation:
+                continue
 
-        current_data = self.money_sheet.get_all_records()
+            registered_emails[email] = {  # type: ignore
+                "Name": registered_row["Name"],
+                "Affiliation": affiliation,
+            }
 
-        # Temporary dictionaries
-        student_dict: Dict[str, float] = {}
-        affiliation_dict: Dict[str, float] = {}
+        student_dict = defaultdict(float)
+        affiliation_dict = defaultdict(float)
 
-        for row in current_data:
+        for row in self.money_sheet.get_all_records():
+            email = str(row.get("Email", ""))
+            money_raised_str = str(row.get("Money Raised", ""))
             if (
-                "Email" not in row
-                or "Money Raised" not in row
-                or "@" not in str(row["Email"])
-                or not str(row["Money Raised"]).replace(".", "", 1).isdigit()
-                or float(row["Money Raised"]) <= 0.0  # checks if its a float
-                or str(row["Email"]) not in registered_emails  # stop the horse play
+                not email
+                or "@" not in email
+                or not money_raised_str.replace(".", "", 1).isdigit()
             ):
                 continue
-                # Lets ignore this record
 
-            email = str(row["Email"])
+            money_raised = float(money_raised_str)
+            if money_raised <= 0.0 or email not in registered_emails:
+                continue
+
             current_reg = registered_emails[email]
-            money_raised = float(row["Money Raised"])
 
-            # Student tally
-            if email in student_dict:
-                student_dict[email] += money_raised
-            else:
-                student_dict[email] = money_raised
-
-            # Affiliation tally
-            affiliation = current_reg["Affiliation"]
-            if affiliation in affiliation_dict:
-                affiliation_dict[affiliation] += money_raised
-            else:
-                affiliation_dict[affiliation] = money_raised
+            student_dict[email] += money_raised
+            affiliation_dict[current_reg["Affiliation"]] += money_raised
 
         self.student_cache = sorted(
-            student_dict.items(),
-            key=lambda item: item[1],
-            reverse=True,
+            student_dict.items(), key=lambda item: item[1], reverse=True
         )
         self.affiliation_cache = sorted(
-            affiliation_dict.items(),
-            key=lambda item: item[1],
-            reverse=True,
+            affiliation_dict.items(), key=lambda item: item[1], reverse=True
         )
 
-    # If we have updated the cache before the cache_ttl seconds has passed,
-    # this method won't do anything. Otherwise updates cache
+    def _get_affiliation_from_row(self, row: Dict[str, str]) -> str:
+        teacher = row.get("Teacher")
+        period = row.get("Period")
+        club = row.get("Club")
+
+        if teacher and period and teacher != "N/A" and period != "N/A":
+            return f"{teacher}'s {period} Period"
+        elif club and club != "N/A":
+            return club
+        return ""
+
     def try_updating_cache(self) -> None:
         if (datetime.now() - self.last_cache_update).seconds >= self.cache_ttl:
             self.update_cache()
