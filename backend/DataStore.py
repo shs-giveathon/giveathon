@@ -1,6 +1,6 @@
 from collections import defaultdict
 from datetime import datetime
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Any
 
 from gspread import Worksheet, exceptions
 
@@ -9,7 +9,8 @@ class DataStore:
     money_sheet: Worksheet
     reg_sheet: Worksheet
     affiliation_cache: List[Tuple[str, float]]
-    student_cache: List[Tuple[str, float]]
+    # each entry is (email, {"MoneyRaised", "Name"})
+    student_cache: List[Tuple[str, Dict[str, float | str]]]
     cache_ttl: int
     last_cache_update: datetime
 
@@ -51,7 +52,7 @@ class DataStore:
                 "Affiliation": affiliation,
             }
 
-        student_dict = defaultdict(float)
+        student_dict: Dict[str, Dict[str, str | float]] = {}
         affiliation_dict = defaultdict(float)
 
         for row in self.money_sheet.get_all_records():
@@ -70,11 +71,17 @@ class DataStore:
 
             current_reg = registered_emails[email]
 
-            student_dict[email] += money_raised
+            if email in student_dict:
+                student_dict[email]["MoneyRaised"] += money_raised # type: ignore
+            else:
+                student_dict[email] = {
+                    "MoneyRaised": money_raised,
+                    "Name": current_reg["Name"]
+                }
             affiliation_dict[current_reg["Affiliation"]] += money_raised
 
         self.student_cache = sorted(
-            student_dict.items(), key=lambda item: item[1], reverse=True
+            student_dict.items(), key=lambda item: item[1]["MoneyRaised"], reverse=True
         )
         self.affiliation_cache = sorted(
             affiliation_dict.items(), key=lambda item: item[1], reverse=True
@@ -96,7 +103,7 @@ class DataStore:
             self.update_cache()
             self.last_cache_update = datetime.now()
 
-    def get_top_students(self, how_many: int) -> List[Tuple[str, float]]:
+    def get_top_students(self, how_many: int) -> List[Tuple[str, Dict[str, float | str]]]:
         self.try_updating_cache()
         return self.student_cache[:how_many]
 
@@ -104,7 +111,7 @@ class DataStore:
         self.try_updating_cache()
         return self.affiliation_cache[:how_many]
 
-    def get_info_by_email(self, email: str) -> Dict[str, any]:
+    def get_info_by_email(self, email: str) -> Dict[str, Any]:
         """
         Gets a detailed history of money raised by the given email,
         along with their affiliation and other details.
@@ -147,7 +154,7 @@ class DataStore:
 
         # Extract the user's money raising history
         history = [
-            (record.get("Timestamp"), float(record.get("Money Raised")))
+            (record.get("Timestamp"), float(record.get("Money Raised"))) # type: ignore
             for record in money_records
             if record.get("Email") == email
             and record.get("Money Raised")
