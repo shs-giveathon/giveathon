@@ -3,13 +3,14 @@ import { FC } from 'react';
 
 export interface LeaderboardRowProps {
   name: string;
+  email: string;
   moneyRaised: number;
   rank: number;
 }
 
-export const LeaderboardRow: FC<LeaderboardRowProps> = ({ name, moneyRaised, rank }) => {
+export const LeaderboardRow: FC<LeaderboardRowProps> = ({ name, email, moneyRaised, rank }) => {
   return (
-    <Link href={`/profile/${name}`}>
+    <Link href={`/profile/${email}`}>
       <div className='border-b-2 mb-1'>
         <div className='flex justify-between'>
           <h1 className='font-semibold'>{rank}.</h1>
