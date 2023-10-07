@@ -8,10 +8,12 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import loadingSpinner from '@/public/spinner.svg';
 
+type PersonData = [string, { MoneyRaised: number; Name: string }];
+
 const Home: NextPage = () => {
   const apiUrl = getApiUrl();
 
-  const [data, setData] = useState<any[][] | null>(null);
+  const [data, setData] = useState<PersonData[] | null>(null);
 
   useEffect(() => {
     fetch(`${apiUrl}/getTopPeople`)
@@ -36,9 +38,9 @@ const Home: NextPage = () => {
       <div className='px-12 mt-6 grid grid-flow-col gap-4'>
         {data.length !== 0 && (
           <>
-            {data.length >= 2 && <LeaderboardTop3 name={data[1][1]["Name"]} email={data[1][0]} moneyRaised={data[1][1]["MoneyRaised"]} rank={2} />}
-            {data.length >= 1 && <LeaderboardTop3 name={data[0][1]["Name"]} email={data[0][0]} moneyRaised={data[0][1]["MoneyRaised"]} rank={1} />}
-            {data.length >= 3 && <LeaderboardTop3 name={data[2][1]["Name"]} email={data[2][0]} moneyRaised={data[2][1]["MoneyRaised"]} rank={3} />}
+            {data.length >= 2 && <LeaderboardTop3 name={data[1][1].Name} email={data[1][0]} moneyRaised={data[1][1].MoneyRaised} rank={2} />}
+            {data.length >= 1 && <LeaderboardTop3 name={data[0][1].Name} email={data[0][0]} moneyRaised={data[0][1].MoneyRaised} rank={1} />}
+            {data.length >= 3 && <LeaderboardTop3 name={data[2][1].Name} email={data[2][0]} moneyRaised={data[2][1].MoneyRaised} rank={3} />}
           </>
         )}
       </div>
@@ -50,7 +52,8 @@ const Home: NextPage = () => {
             <h1>Name</h1>
           </div>
         </div>
-        {data.length !== 0 && data.slice(3).map((data, index) => <LeaderboardRow name={data[1]["Name"]} email={data[0]} moneyRaised={data[1]["MoneyRaised"]} rank={index} key={index} />)}
+        {data.length !== 0 &&
+          data.slice(3).map((data, index) => <LeaderboardRow name={data[1].Name} email={data[0]} moneyRaised={data[1].MoneyRaised} rank={index} key={index} />)}
       </div>
     </>
   );

@@ -9,7 +9,7 @@ import { useParams } from 'next/navigation';
 
 const ProfileId: NextPage = () => {
   const apiUrl = getApiUrl();
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<any>(['']);
   const params = useParams();
 
   // TODO add fetch
@@ -24,7 +24,7 @@ const ProfileId: NextPage = () => {
       </>
     );
 
-  return <div>profile</div>;
+  return <div>{params.profileId}</div>;
 };
 
 export default ProfileId;
