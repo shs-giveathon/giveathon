@@ -38,7 +38,7 @@ const Home: NextPage = () => {
       <div className='font-headers text-center font-bold mt-4 text-2xl md:text-4xl lg:text-6xl'>GiveAThn Leaderboard</div>{' '}
       {/* unknown character is unique to this font - for styling purposes only */}
       <div className='w-[calc(100%-20px)] md:w-[80%] m-auto'>
-        <div className='mt-2 lg:mt-6 grid grid-flow-col gap-[6px]'>
+        <div className='w-full mt-2 lg:mt-6 grid grid-cols-[repeat(3,minmax(0,1fr))] gap-[6px]'>
           {data.length !== 0 && (
             <>
               {data.length >= 2 && <LeaderboardTop3 name={data[1][1].Name} email={data[1][0]} moneyRaised={data[1][1].MoneyRaised} rank={2} animationDelay={200} />}
@@ -49,10 +49,10 @@ const Home: NextPage = () => {
         </div>
         <div className='fade-in glass-effect rounded-lg px-4 mt-[6px] text-xl' style={{ animationDelay: '400ms' }}>
           <div className='border-b-2 mb-1'>
-            <div className='flex justify-between font-bold'>
-              <h1 className='text-md md:text-xl lg:text-2xl'>#</h1>
-              <h1 className='text-md md:text-xl lg:text-2xl'>$ Raised</h1>
-              <h1 className='text-md md:text-xl lg:text-2xl'>Name</h1>
+            <div className='grid grid-cols-[repeat(3,minmax(0,1fr))] font-bold'>
+              <h1 className='text-md md:text-xl lg:text-2xl mr-auto'>#</h1>
+              <h1 className='text-md md:text-xl lg:text-2xl text-center'>$ Raised</h1>
+              <h1 className='text-md md:text-xl lg:text-2xl ml-auto'>Name</h1>
             </div>
           </div>
           {data.length !== 0 &&
