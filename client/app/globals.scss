@@ -3,7 +3,33 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: "Comeback Home";
+  font-family: 'Comeback Home';
 
-    src: url("../public/fonts/CombackHomeRegular.ttf") format("truetype");
+  src: url('../public/fonts/CombackHomeRegular.ttf') format('truetype');
+}
+
+.glass-effect {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 25px 23px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box !important;
+
+  backdrop-filter: blur(10px);
+}
+
+* {
+  transition-duration: 250ms;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
