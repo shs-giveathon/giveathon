@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "Comeback Home";
+
+    src: url("../public/fonts/CombackHomeRegular.ttf") format("truetype");
+}
