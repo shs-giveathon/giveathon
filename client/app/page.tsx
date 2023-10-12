@@ -25,7 +25,7 @@ const Home: NextPage = () => {
   if (!data)
     return (
       <div className='w-full h-screen'>
-        <div className='font-headers text-center font-bold mt-4 text-2xl md:text-4xl lg:text-6xl'>GiveAThn Leaderboard</div>{' '}
+        <div className='fade-in glass-effect rounded-lg w-1/2 mx-auto font-headers text-center font-bold mt-4 text-2xl md:text-4xl lg:text-6xl'>GiveAThn Leaderboard</div>{' '}
         {/* unknown character is unique to this font - for styling purposes only */}
         <div className='grid place-items-center mt-4'>
           <Image src={loadingSpinner} alt='loading' />
@@ -35,7 +35,7 @@ const Home: NextPage = () => {
 
   return (
     <div className='w-full h-screen'>
-      <div className='font-headers text-center font-bold mt-4 text-2xl md:text-4xl lg:text-6xl'>GiveAThn Leaderboard</div>{' '}
+      <div className='fade-in glass-effect rounded-lg w-1/2 mx-auto font-headers text-center font-bold mt-4 text-2xl md:text-4xl lg:text-6xl'>GiveAThn Leaderboard</div>{' '}
       {/* unknown character is unique to this font - for styling purposes only */}
       <div className='w-[calc(100%-20px)] md:w-[80%] m-auto'>
         <div className='w-full mt-2 lg:mt-6 grid grid-cols-[repeat(3,minmax(0,1fr))] gap-[6px]'>
