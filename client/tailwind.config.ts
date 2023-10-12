@@ -11,7 +11,7 @@ const config: Config = {
       'headers': ['"Comeback Home"', 'sans-serif'],
     },
     backgroundImage: {
-      'hero': "url('/timessquare.jpeg')",
+      'hero': "url('/timessquare.jpg')",
     },
     extend: {
       backgroundImage: {
