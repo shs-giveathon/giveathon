@@ -117,7 +117,7 @@ class DataStore:
         along with their affiliation and other details.
 
         Args:
-        - email (str): The email of the student/affiliation.
+        - email (str): The email of the student.
 
         Returns:
         - dict: A dictionary containing name, affiliation, and a history of money raised with timestamps.
@@ -172,4 +172,67 @@ class DataStore:
         return {
             "student_cache": self.student_cache,
             "affiliation_cache": self.affiliation_cache,
+        }
+    
+    def get_info_by_affiliation(self, affiliation: str) -> Dict[str, float | List[Tuple[str, float, str]]]:
+        """
+        Gets a detailed history of money raised by the given affiliation.
+
+        Args:
+        - affiliation (str): The affiliation
+
+        Returns:
+        - dict: Total amount raised, and
+        a list of [timestamp, how much they raised (that time), their name]
+        """
+
+        # TODO: make registered emails cached
+        registered_emails: Dict[str, Dict[str, str]] = {}
+
+        try:
+            records = self.reg_sheet.get_all_records()
+        except exceptions.APIError as e:
+            if e.response.status_code == 403:
+                raise Exception(
+                    "Permission denied to access registration sheet. Please make sure you have access to the sheet."
+                ) from e
+            raise
+
+        for registered_row in records:
+            email = registered_row.get("Email")
+            if not email:
+                continue
+
+            cAffiliation = self._get_affiliation_from_row(registered_row)  # type: ignore
+            if not cAffiliation:
+                continue
+
+            registered_emails[email] = {  # type: ignore
+                "Name": registered_row["Name"],
+                "Affiliation": cAffiliation,
+            }
+
+        # Fetch all records from the money sheet
+        money_records = self.money_sheet.get_all_records()
+
+        # Extract the affiliations's money raising history
+        history = [
+            (str(record.get("Timestamp")), float(record.get("Money Raised")), registered_emails.get(record.get("Email"))["Name"]) # type: ignore
+            for record in money_records
+            if "@" in str(record.get("Email"))
+            and record.get("Email") in registered_emails
+            and record.get("Money Raised")
+            and str(record.get("Money Raised")).replace(".", "", 1).isdigit()
+            and registered_emails.get(record.get("Email"))["Affiliation"] == affiliation # type: ignore (email checked above)
+        ]
+
+        totalMoneyRaised: float = 0.0
+        for h in history:
+            totalMoneyRaised += h[1]
+
+        history.reverse() # Gets the newest stuff first
+
+        return {
+            "MoneyRaised": totalMoneyRaised,
+            "History": history
         }

@@ -83,7 +83,24 @@ def getInfoByEmail():
         return jsonify({"error": str(e)})
     return jsonify(data)
 
+@app.route("/getInfoByAffiliation", methods=["GET"])
+@cross_origin()
+def getInfoByAff():
+    try:
+        json = request.get_json()
+    except:
+        json = {}
+    affiliation = json.get("affiliation")
+    if affiliation is None:
+        return jsonify({"error": "No affiliation provided."})
+    try:
+        data = datastore.get_info_by_affiliation(affiliation)
+    except Exception as e:
+        return jsonify({"error": str(e)})
+    return jsonify(data)
 
+
+# TODO: remove me for production
 @app.route("/debug", methods=["GET"])
 def debug():
     return jsonify(datastore.get_cache())
