@@ -7,6 +7,12 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    fontFamily: { 
+      'headers': ['"Comeback Home"', 'sans-serif'],
+    },
+    backgroundImage: {
+      'hero': "url('/timessquare.jpg')",
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
