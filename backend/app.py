@@ -67,7 +67,7 @@ def affIndex():
     return jsonify(data)
 
 
-@app.route("/getInfoByEmail", methods=["GET"])
+@app.route("/getInfoByEmail", methods=["POST"])
 @cross_origin()
 def getInfoByEmail():
     try:
