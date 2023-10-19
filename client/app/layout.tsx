@@ -11,10 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='en'>
       <body dir='ltr'>
-        <Navbar />
-        <div className='flex bg-hero bg-cover w-full text-white'>
-          <div className='pt-16 w-full'>{children}</div>
-        </div>
+        <div className='flex bg-hero bg-cover w-full text-white'>{children}</div>
       </body>
     </html>
   );
