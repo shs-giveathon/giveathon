@@ -37,6 +37,7 @@ const ProfileId: NextPage = () => {
         {data ? (
           <div className='glass-effect w-[80%] text-center rounded-md p-2 fade-in'>
             <p>{data.Affiliation}</p>
+            <p>History</p>
             <div>
               {data.History.map((h: any) => {
                 return (

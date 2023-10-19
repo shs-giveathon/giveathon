@@ -1,3 +1,4 @@
+import Navbar from '@/components/navbar/navbar';
 import './globals.scss';
 import type { Metadata } from 'next';
 
@@ -10,7 +11,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='en'>
       <body dir='ltr'>
-        <div className='flex bg-hero bg-cover w-full h-screen text-white'>{children}</div>
+        <Navbar />
+        <div className='flex bg-hero bg-cover w-full text-white'>
+          <div className='pt-16 w-full'>{children}</div>
+        </div>
       </body>
     </html>
   );
