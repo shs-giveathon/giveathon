@@ -27,17 +27,15 @@ const ProfileId: NextPage = () => {
       .catch(err => console.error('Error:', err));
   }, []);
 
-  if (data) console.log(data);
-
   return (
     <div className='w-full h-screen'>
       <div className='text-center font-bold text-3xl mt-4'>Give-A-Thon Profile</div>
       <div className='grid place-items-center gap-2'>
-        <div className='glass-effect w-[80%] text-center rounded-md p-2'>
+        <div className='glass-effect w-[80%] text-center rounded-md p-2 fade-in'>
           <p>{decodeURIComponent(params.profileId as string)}</p>
         </div>
         {data ? (
-          <div className='glass-effect w-[80%] text-center rounded-md p-2'>
+          <div className='glass-effect w-[80%] text-center rounded-md p-2 fade-in'>
             <p>{data.Affiliation}</p>
             <div>
               {data.History.map((h: any) => {
