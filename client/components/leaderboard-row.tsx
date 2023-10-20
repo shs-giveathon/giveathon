@@ -10,7 +10,7 @@ export interface LeaderboardRowProps {
 
 export const LeaderboardRow: FC<LeaderboardRowProps> = ({ name, email, moneyRaised, rank }) => {
   return (
-    <Link href={`/profile/${email}`}>
+    <Link href={`/user/${email}`}>
       <div className='border-b-2 mb-1'>
         <div className='flex justify-between'>
           <h1 className='font-headers font-semibold'>{rank}.</h1>
