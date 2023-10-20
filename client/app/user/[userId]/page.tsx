@@ -8,7 +8,7 @@ import loadingSpinner from '@/public/spinner.svg';
 import { useParams } from 'next/navigation';
 import Navbar from '@/components/navbar/navbar';
 
-const ProfileId: NextPage = () => {
+const UserIdPage: NextPage = () => {
   const apiUrl = getApiUrl();
   const [data, setData] = useState<any | null>();
   const params = useParams();
@@ -61,4 +61,4 @@ const ProfileId: NextPage = () => {
   );
 };
 
-export default ProfileId;
+export default UserIdPage;
