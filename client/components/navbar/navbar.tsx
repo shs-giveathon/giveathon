@@ -30,7 +30,7 @@ const Navbar: FC = () => {
 
           return (
             <div className={cn('grid grid-flow-col place-items-center gap-2', index !== 0 && 'ml-2')} key={path}>
-              <Path path={path} route={routeTo} />
+              <Path path={decodeURIComponent(path)} route={routeTo} />
               {index !== 0 && index !== pathnames.length - 1 && <ChevronRight className='w-4 h-4 text-white' />}
             </div>
           );
