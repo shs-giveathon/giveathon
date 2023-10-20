@@ -13,7 +13,7 @@ const Navbar: FC = () => {
   const pathnames = pathname.split('/');
 
   return (
-    <div className='glass-effect py-2 px-4 w-full flex gap-2 fixed z-50'>
+    <div className='glass-effect !border-x-0 !border-t-0 py-2 px-4 w-full flex gap-2 fixed z-50'>
       <div className='grid grid-flow-col place-items-center'>
         <div className='grid grid-flow-col gap-2 place-items-center'>
           <Link href='/'>
