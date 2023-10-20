@@ -44,7 +44,7 @@ const ProfileId: NextPage = () => {
               <div>
                 {data.History.map((h: any) => {
                   return (
-                    <div className='grid grid-flow-col'>
+                    <div className='grid grid-flow-col' key={`${h[0]}-${h[1]}`}>
                       <p className='mr-auto'>{h[0]}</p>
                       <p className='ml-auto'>${h[1].toFixed(2)}</p>
                     </div>
