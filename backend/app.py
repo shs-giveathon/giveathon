@@ -83,7 +83,7 @@ def getInfoByEmail():
         return jsonify({"error": str(e)})
     return jsonify(data)
 
-@app.route("/getInfoByAffiliation", methods=["GET"])
+@app.route("/getInfoByAffiliation", methods=["POST"])
 @cross_origin()
 def getInfoByAff():
     try:

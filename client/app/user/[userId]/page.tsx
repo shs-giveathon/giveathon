@@ -7,6 +7,8 @@ import Image from 'next/image';
 import loadingSpinner from '@/public/spinner.svg';
 import { useParams } from 'next/navigation';
 import Navbar from '@/components/navbar/navbar';
+import Link from 'next/link';
+import { formatDate } from '@/utils/formatDate';
 
 const UserIdPage: NextPage = () => {
   const apiUrl = getApiUrl();
@@ -39,13 +41,18 @@ const UserIdPage: NextPage = () => {
           </div>
           {data ? (
             <div className='w-[calc(100%-20px)] md:w-[80%] glass-effect text-center rounded-md p-2 fade-in'>
-              <p className='font-semibold text-xl'>{data.Affiliation}</p>
+              <Link href={`/affiliation/${data.Affiliation}`}>
+                <p className='font-semibold text-xl'>{data.Affiliation}</p>
+              </Link>
               <p>History</p>
               <div>
                 {data.History.map((h: any) => {
                   return (
                     <div className='grid grid-flow-col' key={`${h[0]}-${h[1]}`}>
-                      <p className='mr-auto'>{h[0]}</p>
+                      <div className='grid grid-cols-[max-content_max-content] mr-auto gap-2 place-items-center'>
+                        <p className='mr-auto font-semibold'>{decodeURIComponent(params.userId as string)}</p>
+                        <p className='mr-auto text-sm'>{formatDate(h[0])}</p>
+                      </div>
                       <p className='ml-auto'>${h[1].toFixed(2)}</p>
                     </div>
                   );
