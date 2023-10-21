@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { FC } from 'react';
 import { usePathname } from 'next/navigation';
 import { Candy, ChevronRight } from 'lucide-react';
