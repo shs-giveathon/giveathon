@@ -9,6 +9,7 @@ import { useParams } from 'next/navigation';
 import Navbar from '@/components/navbar/navbar';
 import Link from 'next/link';
 import { formatDate } from '@/utils/formatDate';
+import { ExternalLink } from 'lucide-react';
 
 const UserIdPage: NextPage = () => {
   const apiUrl = getApiUrl();
@@ -42,7 +43,10 @@ const UserIdPage: NextPage = () => {
           {data ? (
             <div className='w-[calc(100%-20px)] md:w-[80%] glass-effect text-center rounded-md p-2 fade-in'>
               <Link href={`/affiliation/${data.Affiliation}`}>
-                <p className='font-semibold text-xl'>{data.Affiliation}</p>
+                <div className='w-max mx-auto grid grid-cols-[max-content_max-content] place-items-center gap-2'>
+                  <p className='font-semibold text-xl'>{data.Affiliation}</p>
+                  <ExternalLink className='w-4 h-4' />
+                </div>
               </Link>
               <p>History</p>
               <div>
