@@ -14,6 +14,9 @@ class DataStore:
     cache_ttl: int
     last_cache_update: datetime
 
+    raw_money_cache: List[Dict[Any, Any]]
+    registrations_cache: Dict[str, Dict[str, str]]
+
     def __init__(self, money_sheet: Worksheet, reg_sheet: Worksheet, cache_ttl: int):
         self.money_sheet = money_sheet
         self.reg_sheet = reg_sheet
@@ -21,6 +24,8 @@ class DataStore:
         self.student_cache = []
         self.cache_ttl = cache_ttl
         self.last_cache_update = datetime.min
+        self.raw_money_cache = []
+        self.registrations_cache = {}
         self.update_cache()
 
     def update_cache(self) -> None:
@@ -52,10 +57,13 @@ class DataStore:
                 "Affiliation": affiliation,
             }
 
+        self.registrations_cache = registered_emails
+        self.raw_money_cache = self.money_sheet.get_all_records()
+
         student_dict: Dict[str, Dict[str, str | float]] = {}
         affiliation_dict = defaultdict(float)
 
-        for row in self.money_sheet.get_all_records():
+        for row in self.raw_money_cache:
             email = str(row.get("Email", ""))
             money_raised_str = str(row.get("Money Raised", ""))
             if (
@@ -122,35 +130,24 @@ class DataStore:
         Returns:
         - dict: A dictionary containing name, affiliation, and a history of money raised with timestamps.
         """
+        self.try_updating_cache()
+
         # Check for a valid email
         if "@" not in email:
             raise ValueError("Invalid email provided.")
 
-        # Fetch all records from the registration sheet
-        try:
-            reg_records = self.reg_sheet.get_all_records()
-        except exceptions.APIError as e:
-            if e.response.status_code == 403:
-                raise Exception(
-                    "Permission denied to access registration sheet. Please make sure you have access to the sheet."
-                ) from e
-            raise
-
         # Search for the user's registration info
-        user_info = next(
-            (record for record in reg_records if record.get("Email") == email),
-            None,
-        )
+        user_info = self.registrations_cache.get(email)
 
         # If the user is not found in the registration records
         if not user_info:
             raise ValueError("Email not found in registration records.")
 
-        affiliation = self._get_affiliation_from_row(user_info)  # type: ignore
-        name = user_info.get("Name")
+        affiliation = user_info["Affiliation"]  # type: ignore
+        name = user_info["Name"]
 
         # Fetch all records from the money sheet
-        money_records = self.money_sheet.get_all_records()
+        money_records = self.raw_money_cache
 
         # Extract the user's money raising history
         history = [
@@ -185,35 +182,12 @@ class DataStore:
         - dict: Total amount raised, and
         a list of [timestamp, how much they raised (that time), their name]
         """
+        self.try_updating_cache()
 
-        # TODO: make registered emails cached
-        registered_emails: Dict[str, Dict[str, str]] = {}
-
-        try:
-            records = self.reg_sheet.get_all_records()
-        except exceptions.APIError as e:
-            if e.response.status_code == 403:
-                raise Exception(
-                    "Permission denied to access registration sheet. Please make sure you have access to the sheet."
-                ) from e
-            raise
-
-        for registered_row in records:
-            email = registered_row.get("Email")
-            if not email:
-                continue
-
-            cAffiliation = self._get_affiliation_from_row(registered_row)  # type: ignore
-            if not cAffiliation:
-                continue
-
-            registered_emails[email] = {  # type: ignore
-                "Name": registered_row["Name"],
-                "Affiliation": cAffiliation,
-            }
+        registered_emails = self.registrations_cache
 
         # Fetch all records from the money sheet
-        money_records = self.money_sheet.get_all_records()
+        money_records = self.raw_money_cache
 
         # Extract the affiliations's money raising history
         history = [
