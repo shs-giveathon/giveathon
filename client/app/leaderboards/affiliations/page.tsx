@@ -71,4 +71,5 @@ const AffiliationsLeaderboardPage: NextPage = () => {
   );
 };
 
+export const runtime = 'edge';
 export default AffiliationsLeaderboardPage;
