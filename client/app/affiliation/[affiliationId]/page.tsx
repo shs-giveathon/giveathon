@@ -70,4 +70,5 @@ const AffiliationIdPage: NextPage = () => {
   );
 };
 
+export const runtime = 'edge';
 export default AffiliationIdPage;

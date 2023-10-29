@@ -70,5 +70,4 @@ const UsersLeaderboardPage: NextPage = () => {
   );
 };
 
-export const runtime = 'edge';
 export default UsersLeaderboardPage;
