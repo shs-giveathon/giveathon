@@ -15,7 +15,7 @@ export const LeaderboardTop3: FC<LeaderboardTop3Props> = ({ name, email, moneyRa
 
   return (
     <Link href={`/user/${email}`}>
-      <div className='fade-in glass-effect p-1 md:p-4 lg:p-6 rounded-lg' style={{ animationDelay: `${animationDelay ? animationDelay : 0}ms` }}>
+      <div className='h-full fade-in glass-effect p-1 md:p-4 lg:p-6 rounded-lg' style={{ animationDelay: `${animationDelay ? animationDelay : 0}ms` }}>
         <h2 className='text-center text-4xl md:text-5xl lg:text-6xl font-bold'>{emoji[rank - 1]}</h2>
         <h3 className='font-headers mt-2 text-center text-2xl md:text-3xl lg:text-5xl font-bold'>{place[rank - 1]} Place</h3>
         <h2 className='mt-1 lg:mt-4 text-center text-xl md:text-2xl lg:text-4xl text-green-500 font-bold'>${moneyRaised.toFixed(2)}</h2>
