@@ -64,7 +64,7 @@ const UsersLeaderboardPage: NextPage = () => {
               </div>
             </div>
             {data.length > 3 ? (
-              data.slice(3).map((data, index) => <LeaderboardRow name={data[1].Name} email={data[0]} moneyRaised={data[1].MoneyRaised} rank={index} key={index} />)
+              data.slice(3).map((data, index) => <LeaderboardRow name={data[1].Name} email={data[0]} moneyRaised={data[1].MoneyRaised} rank={index + 4} key={index} />)
             ) : (
               <p className='text-center p-2'>No other users yet!</p>
             )}

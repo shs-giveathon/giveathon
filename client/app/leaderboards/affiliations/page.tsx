@@ -66,7 +66,7 @@ const AffiliationsLeaderboardPage: NextPage = () => {
               </div>
             </div>
             {data.length > 3 ? (
-              data.slice(3).map((data, index) => <LeaderboardAffiliationRow name={data[0]} moneyRaised={data[1]} rank={index} key={index} />)
+              data.slice(3).map((data, index) => <LeaderboardAffiliationRow name={data[0]} moneyRaised={data[1]} rank={index + 4} key={index} />)
             ) : (
               <p className='text-center p-2'>No other affiliations yet!</p>
             )}
