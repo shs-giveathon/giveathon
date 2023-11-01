@@ -99,12 +99,5 @@ def getInfoByAff():
         return jsonify({"error": str(e)})
     return jsonify(data)
 
-
-# TODO: remove me for production
-@app.route("/debug", methods=["GET"])
-def debug():
-    return jsonify(datastore.get_cache())
-
-
 if __name__ == "__main__":
     app.run(debug=True)
