@@ -11,10 +11,10 @@ export const Tabs: FC<TabsProps> = ({ className }) => {
     <div className={cn('fade-in glass-effect rounded-lg p-2 grid place-items-center', className)}>
       <div className='grid grid-flow-col gap-2 w-max place-items-center '>
         <Link href='/leaderboards/users'>
-          <button className='bg-blue-500 hover:bg-blue-600 transition p-1 rounded-md'>Users</button>
+          <button className='bg-gray-500 hover:bg-gray-600 transition py-1 px-2 rounded-md'>Users</button>
         </Link>
         <Link href='/leaderboards/affiliations'>
-          <button className='bg-blue-500 hover:bg-blue-600 transition p-1 rounded-md'>Affiliations</button>
+          <button className='bg-gray-500 hover:bg-gray-600 transition py-1 px-2  rounded-md'>Affiliations</button>
         </Link>
       </div>
     </div>
