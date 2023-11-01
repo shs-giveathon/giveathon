@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import loadingSpinner from '@/public/spinner.svg';
 import { useParams } from 'next/navigation';
-import { Navbar } from '@/components/navbar/navbar';
 import Link from 'next/link';
 import { formatDate } from '@/utils/formatDate';
 import { ExternalLink } from 'lucide-react';

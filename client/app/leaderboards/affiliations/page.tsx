@@ -5,10 +5,8 @@ import { NextPage } from 'next';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import loadingSpinner from '@/public/spinner.svg';
-import { Navbar } from '@/components/navbar/navbar';
 import { LeaderboardAffilationTop3 } from '@/components/leaderboard-a-top-3';
 import { LeaderboardAffiliationRow } from '@/components/leaderboard-a-row';
-import { Tabs } from '@/components/tabs';
 
 type AffiliationData = [string, number];
 

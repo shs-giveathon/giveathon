@@ -35,7 +35,7 @@ export const Navbar: FC = () => {
             return (
               <Link
                 key={item.path}
-                className={cn('p-1 rounded-md relative no-underline duration-300 ease-in', isActive && 'bg-blue-500')}
+                className={cn('px-2 py-1 rounded-md relative no-underline duration-300 ease-in', isActive && 'bg-gray-500')}
                 data-active={isActive}
                 href={item.path}
               >

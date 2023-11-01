@@ -7,8 +7,6 @@ import { NextPage } from 'next';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import loadingSpinner from '@/public/spinner.svg';
-import { Navbar } from '@/components/navbar/navbar';
-import { Tabs } from '@/components/tabs';
 
 type PersonData = [string, { MoneyRaised: number; Name: string }];
 

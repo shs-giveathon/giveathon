@@ -1,6 +1,5 @@
 'use client';
 
-import { Navbar } from '@/components/navbar/navbar';
 import { getApiUrl } from '@/hooks/api-url';
 import { NextPage } from 'next';
 import { useParams } from 'next/navigation';
