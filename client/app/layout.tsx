@@ -9,7 +9,27 @@ export const metadata: Metadata = {
   title: 'GiveAThon 2023 🕷️',
   icons: {
     icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>"
-  }
+  },
+  authors: [
+    {
+      name: 'Andrew Wolf'
+    },
+    {
+      name: 'Connor Lin'
+    },
+    {
+      name: 'Max Hu'
+    },
+    {
+      name: 'Mikhail Seviaryn'
+    },
+    {
+      name: 'Abra Giddings'
+    },
+    {
+      name: 'Evelyn Chan'
+    },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
