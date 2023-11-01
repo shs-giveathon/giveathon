@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^1.5.1",
     "clsx": "^2.0.0",
+    "framer-motion": "^10.16.4",
     "lucide-react": "^0.285.0",
     "next": "latest",
     "react": "latest",

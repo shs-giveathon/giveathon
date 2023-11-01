@@ -1,6 +1,6 @@
 'use client';
 
-import Navbar from '@/components/navbar/navbar';
+import { Navbar } from '@/components/navbar/navbar';
 import { getApiUrl } from '@/hooks/api-url';
 import { NextPage } from 'next';
 import { useParams } from 'next/navigation';
@@ -36,7 +36,6 @@ const AffiliationIdPage: NextPage = () => {
 
   return (
     <>
-      <Navbar />
       <div className='w-full h-screen pt-16'>
         <div className='fade-in glass-effect rounded-lg w-1/2 mx-auto font-headers text-center font-bold mt-4 text-3xl xs:text-4xl lg:text-6xl'>GiveAThn Affiliation</div>{' '}
         <div className='mt-4 grid place-items-center gap-2'>

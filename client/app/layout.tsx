@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils';
 import './globals.scss';
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
+import { Navbar } from '@/components/navbar/navbar';
 
 const font = Open_Sans({ subsets: ['latin'] });
 
@@ -36,7 +37,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='en'>
       <body dir='ltr' className={cn(font.className, 'bg-black')}>
-        <div className='flex bg-hero bg-cover w-full text-white'>{children}</div>
+        <div className='flex bg-hero bg-cover w-full text-white'>
+          <Navbar />
+          {children}
+        </div>
       </body>
     </html>
   );
