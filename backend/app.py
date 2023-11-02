@@ -22,7 +22,8 @@ moneyWorksheet = sh.worksheet("MoneyForm")
 registrationWorksheet = sh.worksheet("RegistrationForm")
 print("Successfully connected to the spreadsheet!")
 
-datastore = DataStore(moneyWorksheet, registrationWorksheet, 1)
+CACHE_DELAY = 60 # in seconds
+datastore = DataStore(moneyWorksheet, registrationWorksheet, CACHE_DELAY)
 
 
 @app.route("/getTopPeople", methods=["GET"])
