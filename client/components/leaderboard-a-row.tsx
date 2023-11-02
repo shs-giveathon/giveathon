@@ -10,12 +10,14 @@ export interface LeaderboardAffiliationRowProps {
 export const LeaderboardAffiliationRow: FC<LeaderboardAffiliationRowProps> = ({ name, moneyRaised, rank }) => {
   return (
     <Link href={`/affiliation/${name}`}>
-      <div className='border-b-2 mb-1'>
-        <div className='flex justify-between'>
+      <div className='border-b-2 mb-1 flex'>
+        <div className='w-1/3'>
           <h1 className='font-headers font-semibold'>{rank}.</h1>
-          <h1 className='ml-5 text-green-600'>${moneyRaised.toFixed(2)}</h1>
-          <h1>{name}</h1>
         </div>
+        <div className='w-1/3'>
+          <h1 className=' text-green-500 text-center'>${moneyRaised.toFixed(2)}</h1>
+        </div>
+        <h1 className='ml-auto'>{name}</h1>
       </div>
     </Link>
   );
