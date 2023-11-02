@@ -45,6 +45,7 @@ export const Navbar: FC = () => {
           })}
         </div>
       </div>
+      <Link target="_blank" href="https://docs.google.com/document/d/1-fvu3G89BqQeepY1A9rA0Iz72FGM8v1svccmArKnPLk/edit?usp=sharing" className='text-sm mt-1.5 ml-auto'>Submit Fundraising ➜</Link>
     </div>
   );
 };
