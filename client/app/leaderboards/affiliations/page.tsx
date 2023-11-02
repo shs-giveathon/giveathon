@@ -51,7 +51,7 @@ const AffiliationsLeaderboardPage: NextPage = () => {
             )}
           </div>
           <div className='fade-in glass-effect rounded-lg px-4 text-xl' style={{ animationDelay: '400ms' }}>
-            <div className='border-b-2 mb-1'>
+            <div className=''>
               <div className='grid grid-cols-[repeat(3,minmax(0,1fr))] font-bold'>
                 <h1 className='text-md md:text-xl lg:text-2xl mr-auto'>#</h1>
                 <h1 className='text-md md:text-xl lg:text-2xl text-center'>$ Raised</h1>
