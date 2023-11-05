@@ -14,7 +14,7 @@ export const AffiliationsComponent: FC = () => {
   const lastElementRef = useRef<HTMLDivElement>(null);
   const apiUrl = getApiUrl();
 
-  const initalUserCount = 10;
+  const initialAffiliationCount = 10;
   const fetchMoreAmount = 5;
   const fetchLink = `${apiUrl}/getTopAffiliations`;
 
@@ -45,7 +45,7 @@ export const AffiliationsComponent: FC = () => {
     const fetchThreads = async () => {
       try {
         const response = await axios.post(fetchLink, {
-          limit: initalUserCount,
+          limit: initialAffiliationCount,
           start: 0
         });
 
