@@ -81,7 +81,7 @@ export const UsersComponent: FC = () => {
   }, [users, skip]);
 
   return (
-    <div className='fade-in glass-effect rounded-lg px-4 text-xl' style={{ animationDelay: '400ms' }}>
+    <div className='fade-in glass-effect rounded-lg px-4 text-xl mb-[60px]' style={{ animationDelay: '400ms' }}>
       <div className=''>
         <div className='grid grid-cols-[repeat(3,minmax(0,1fr))] font-bold'>
           <h1 className='text-md md:text-xl lg:text-2xl mr-auto'>#</h1>
@@ -94,7 +94,7 @@ export const UsersComponent: FC = () => {
       ) : (
         <p className='text-center p-2'>No other users yet!</p>
       )}
-      <div ref={lastElementRef} className='z-[-1] text-center w-full h-[400px] mt-[-400px]'></div>
+      <div ref={lastElementRef} className='z-[-1] text-center w-full h-[400px] mt-[-400px] bg-red-500/20'></div>
     </div>
   );
 };
