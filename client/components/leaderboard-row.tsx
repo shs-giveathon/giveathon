@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { FC } from 'react';
 
@@ -11,7 +12,7 @@ export interface LeaderboardRowProps {
 export const LeaderboardRow: FC<LeaderboardRowProps> = ({ name, email, moneyRaised, rank }) => {
   return (
     <Link href={`/user/${email}`}>
-      <div className='border-t-2 mb-1 flex'>
+      <div className={cn('mb-1 flex p-2 rounded-md', rank % 2 === 0 && 'bg-black/20')}>
         <div className='w-1/3'>
           <h1 className='font-headers font-semibold'>{rank}.</h1>
         </div>

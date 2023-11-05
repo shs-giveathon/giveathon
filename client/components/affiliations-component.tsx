@@ -83,7 +83,7 @@ export const AffiliationsComponent: FC = () => {
 
   return (
     <div className='fade-in glass-effect rounded-lg px-4 text-xl mb-[60px]' style={{ animationDelay: '400ms' }}>
-      <div className=''>
+      <div className='my-2'>
         <div className='grid grid-cols-[repeat(3,minmax(0,1fr))] font-bold'>
           <h1 className='text-md md:text-xl lg:text-2xl mr-auto'>#</h1>
           <h1 className='text-md md:text-xl lg:text-2xl text-center'>$ Raised</h1>
