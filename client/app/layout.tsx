@@ -36,7 +36,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
-      <body dir='ltr' className={cn(font.className, 'bg-hero bg-cover bg-no-repeat bg-fixed text-white')}>
+      <body
+        dir='ltr'
+        className={cn(font.className, 'bg-cover bg-no-repeat bg-fixed text-white')}
+        style={{ backgroundImage: "url('/timessquare.webp')", backgroundAttachment: 'fixed' }}
+      >
         <Navbar />
         {children}
       </body>
