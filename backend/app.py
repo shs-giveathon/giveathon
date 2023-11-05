@@ -22,7 +22,7 @@ moneyWorksheet = sh.worksheet("MoneyForm")
 registrationWorksheet = sh.worksheet("RegistrationForm")
 print("Successfully connected to the spreadsheet!")
 
-CACHE_DELAY = 60 # in seconds
+CACHE_DELAY = 60  # in seconds
 datastore = DataStore(moneyWorksheet, registrationWorksheet, CACHE_DELAY)
 
 
@@ -31,6 +31,7 @@ datastore = DataStore(moneyWorksheet, registrationWorksheet, CACHE_DELAY)
 def index():
     # Set the default parameters
     limit = 10
+    start = 0
 
     try:
         json = request.get_json()
@@ -38,9 +39,11 @@ def index():
         json = {}
     if json.get("limit") is not None:
         limit = int(json["limit"])
+    if json.get("start") is not None:
+        start = int(json["start"])
 
     try:
-        data = datastore.get_top_students(limit)
+        data = datastore.get_top_students(limit, start)
     except Exception as e:
         return jsonify({"error": str(e)})
 
@@ -52,6 +55,7 @@ def index():
 def affIndex():
     # Set the default parameters
     limit = 10
+    start = 0
 
     try:
         json = request.get_json()
@@ -59,9 +63,11 @@ def affIndex():
         json = {}
     if json.get("limit") is not None:
         limit = int(json["limit"])
+    if json.get("start") is not None:
+        start = int(json["start"])
 
     try:
-        data = datastore.get_top_affiliations(limit)
+        data = datastore.get_top_affiliations(limit, start)
     except Exception as e:
         return jsonify({"error": str(e)})
 
@@ -84,6 +90,7 @@ def getInfoByEmail():
         return jsonify({"error": str(e)})
     return jsonify(data)
 
+
 @app.route("/getInfoByAffiliation", methods=["POST"])
 @cross_origin()
 def getInfoByAff():
@@ -99,6 +106,7 @@ def getInfoByAff():
     except Exception as e:
         return jsonify({"error": str(e)})
     return jsonify(data)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

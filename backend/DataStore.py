@@ -1,6 +1,6 @@
 from collections import defaultdict
 from datetime import datetime
-from typing import Dict, List, Tuple, Any
+from typing import Any, Dict, List, Tuple
 
 from gspread import Worksheet, exceptions
 
@@ -80,11 +80,11 @@ class DataStore:
             current_reg = registered_emails[email]
 
             if email in student_dict:
-                student_dict[email]["MoneyRaised"] += money_raised # type: ignore
+                student_dict[email]["MoneyRaised"] += money_raised  # type: ignore
             else:
                 student_dict[email] = {
                     "MoneyRaised": money_raised,
-                    "Name": current_reg["Name"]
+                    "Name": current_reg["Name"],
                 }
             affiliation_dict[current_reg["Affiliation"]] += money_raised
 
@@ -111,13 +111,19 @@ class DataStore:
             self.update_cache()
             self.last_cache_update = datetime.now()
 
-    def get_top_students(self, how_many: int) -> List[Tuple[str, Dict[str, float | str]]]:
+    def get_top_students(
+        self, how_many: int, start: int
+    ) -> List[Tuple[str, Dict[str, float | str]]]:
         self.try_updating_cache()
-        return self.student_cache[:how_many]
+        max_index = len(self.student_cache)
+        return self.student_cache[start : min(how_many + start, max_index)]
 
-    def get_top_affiliations(self, how_many: int) -> List[Tuple[str, float]]:
+    def get_top_affiliations(
+        self, how_many: int, start: int
+    ) -> List[Tuple[str, float]]:
         self.try_updating_cache()
-        return self.affiliation_cache[:how_many]
+        max_index = len(self.affiliation_cache)
+        return self.affiliation_cache[start : min(how_many + start, max_index)]
 
     def get_info_by_email(self, email: str) -> Dict[str, Any]:
         """
@@ -151,7 +157,7 @@ class DataStore:
 
         # Extract the user's money raising history
         history = [
-            (record.get("Timestamp"), float(record.get("Money Raised"))) # type: ignore
+            (record.get("Timestamp"), float(record.get("Money Raised")))  # type: ignore
             for record in money_records
             if record.get("Email") == email
             and record.get("Money Raised")
@@ -170,8 +176,10 @@ class DataStore:
             "student_cache": self.student_cache,
             "affiliation_cache": self.affiliation_cache,
         }
-    
-    def get_info_by_affiliation(self, affiliation: str) -> Dict[str, float | List[Tuple[str, float, str]]]:
+
+    def get_info_by_affiliation(
+        self, affiliation: str
+    ) -> Dict[str, float | List[Tuple[str, float, str]]]:
         """
         Gets a detailed history of money raised by the given affiliation.
 
@@ -191,22 +199,19 @@ class DataStore:
 
         # Extract the affiliations's money raising history
         history = [
-            (str(record.get("Timestamp")), float(record.get("Money Raised")), registered_emails.get(record.get("Email"))["Name"]) # type: ignore
+            (str(record.get("Timestamp")), float(record.get("Money Raised")), registered_emails.get(record.get("Email"))["Name"])  # type: ignore
             for record in money_records
             if "@" in str(record.get("Email"))
             and record.get("Email") in registered_emails
             and record.get("Money Raised")
             and str(record.get("Money Raised")).replace(".", "", 1).isdigit()
-            and registered_emails.get(record.get("Email"))["Affiliation"] == affiliation # type: ignore (email checked above)
+            and registered_emails.get(record.get("Email"))["Affiliation"] == affiliation  # type: ignore (email checked above)
         ]
 
         totalMoneyRaised: float = 0.0
         for h in history:
             totalMoneyRaised += h[1]
 
-        history.reverse() # Gets the newest stuff first
+        history.reverse()  # Gets the newest stuff first
 
-        return {
-            "MoneyRaised": totalMoneyRaised,
-            "History": history
-        }
+        return {"MoneyRaised": totalMoneyRaised, "History": history}
