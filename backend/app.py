@@ -25,7 +25,7 @@ print("Successfully connected to the spreadsheet!")
 datastore = DataStore(moneyWorksheet, registrationWorksheet, 1)
 
 
-@app.route("/getTopPeople", methods=["GET"])
+@app.route("/getTopPeople", methods=["POST"])
 @cross_origin()
 def index():
     # Set the default parameters
@@ -43,7 +43,12 @@ def index():
     return jsonify(data)
 
 
+<<<<<<< Updated upstream
 @app.route("/getTopAffiliations", methods=["GET"])
+=======
+@app.route("/getTopAffiliations", methods=["POST"])
+@cross_origin()
+>>>>>>> Stashed changes
 def affIndex():
     # Set the default parameters
     limit = 10
