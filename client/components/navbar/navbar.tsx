@@ -64,8 +64,8 @@ export const Navbar: FC = () => {
               <div className='grid grid-flow-row gap-2'>
                 {navItems.map(item => {
                   return (
-                    <SheetClose asChild>
-                      <Link key={item.path} href={item.path}>
+                    <SheetClose asChild key={`mobile-${item.path}`}>
+                      <Link href={item.path}>
                         <div className='grid grid-cols-[max-content_auto] gap-2 place-items-center w-max'>
                           {item.icon}
                           <span className='text-white'>{item.name}</span>
