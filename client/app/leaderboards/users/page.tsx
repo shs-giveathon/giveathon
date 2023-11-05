@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import loadingSpinner from '@/public/spinner.svg';
 
-type PersonData = [string, { MoneyRaised: number; Name: string }];
+export type PersonData = [string, { MoneyRaised: number; Name: string }];
 
 const UsersLeaderboardPage: NextPage = () => {
   const apiUrl = getApiUrl();
