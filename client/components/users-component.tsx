@@ -94,7 +94,7 @@ export const UsersComponent: FC = () => {
       ) : (
         <p className='text-center p-2'>No other users yet!</p>
       )}
-      <div ref={lastElementRef} className='z-[-1] text-center w-full h-[400px] mt-[-400px] bg-red-500/20'></div>
+      <div ref={lastElementRef} className='z-[-1] text-center w-full h-[600px] mt-[-600px]'></div>
     </div>
   );
 };

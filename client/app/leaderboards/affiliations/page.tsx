@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import loadingSpinner from '@/public/spinner.svg';
 import { LeaderboardAffilationTop3 } from '@/components/leaderboard-a-top-3';
 import { LeaderboardAffiliationRow } from '@/components/leaderboard-a-row';
+import axios from 'axios';
 
 type AffiliationData = [string, number];
 
@@ -16,10 +17,11 @@ const AffiliationsLeaderboardPage: NextPage = () => {
   const [data, setData] = useState<AffiliationData[] | null>(null);
 
   useEffect(() => {
-    fetch(`${apiUrl}/getTopAffiliations`)
-      .then(response => response.json())
-      .then(data => setData(data))
-      .catch(err => console.error('Error:', err));
+    const fetch = async () => {
+      const response = await axios.post(`${apiUrl}/getTopAffiliations`);
+      setData(response.data);
+    };
+    fetch();
   }, []);
 
   if (!data)
