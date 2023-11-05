@@ -7,6 +7,8 @@ import { NextPage } from 'next';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import loadingSpinner from '@/public/spinner.svg';
+import { UsersComponent } from '@/components/users-component';
+import axios from 'axios';
 
 export type PersonData = [string, { MoneyRaised: number; Name: string }];
 
@@ -16,10 +18,11 @@ const UsersLeaderboardPage: NextPage = () => {
   const [data, setData] = useState<PersonData[] | null>(null);
 
   useEffect(() => {
-    fetch(`${apiUrl}/getTopPeople`)
-      .then(response => response.json())
-      .then(data => setData(data))
-      .catch(err => console.error('Error:', err));
+    const fetch = async () => {
+      const response = await axios.post(`${apiUrl}/getTopPeople`);
+      setData(response.data);
+    };
+    fetch();
   }, []);
 
   if (!data)
@@ -50,20 +53,7 @@ const UsersLeaderboardPage: NextPage = () => {
               </>
             )}
           </div>
-          <div className='fade-in glass-effect rounded-lg px-4 text-xl' style={{ animationDelay: '400ms' }}>
-            <div className=''>
-              <div className='grid grid-cols-[repeat(3,minmax(0,1fr))] font-bold'>
-                <h1 className='text-md md:text-xl lg:text-2xl mr-auto'>#</h1>
-                <h1 className='text-md md:text-xl lg:text-2xl text-center'>$ Raised</h1>
-                <h1 className='text-md md:text-xl lg:text-2xl ml-auto'>Name</h1>
-              </div>
-            </div>
-            {data.length > 3 ? (
-              data.slice(3).map((data, index) => <LeaderboardRow name={data[1].Name} email={data[0]} moneyRaised={data[1].MoneyRaised} rank={index + 4} key={index} />)
-            ) : (
-              <p className='text-center p-2'>No other users yet!</p>
-            )}
-          </div>
+          <UsersComponent />
         </div>
       </div>
     </>

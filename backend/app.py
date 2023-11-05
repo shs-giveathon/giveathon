@@ -26,7 +26,7 @@ CACHE_DELAY = 60  # in seconds
 datastore = DataStore(moneyWorksheet, registrationWorksheet, CACHE_DELAY)
 
 
-@app.route("/getTopPeople", methods=["GET"])
+@app.route("/getTopPeople", methods=["POST"])
 @cross_origin()
 def index():
     # Set the default parameters
@@ -50,7 +50,7 @@ def index():
     return jsonify(data)
 
 
-@app.route("/getTopAffiliations", methods=["GET"])
+@app.route("/getTopAffiliations", methods=["POST"])
 @cross_origin()
 def affIndex():
     # Set the default parameters
