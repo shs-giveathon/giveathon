@@ -29,15 +29,15 @@ export const metadata: Metadata = {
     },
     {
       name: 'Evelyn Chan'
-    },
-  ],
+    }
+  ]
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
       <body dir='ltr' className={cn(font.className, 'bg-black')}>
-        <div className='flex bg-hero bg-cover w-full text-white'>
+        <div className='flex bg-hero bg-cover w-full text-white pb-[60px]'>
           <Navbar />
           {children}
         </div>
