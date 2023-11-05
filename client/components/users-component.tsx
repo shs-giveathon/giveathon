@@ -37,7 +37,7 @@ export const UsersComponent: FC = () => {
       }
       setDontFetch(false);
     } catch (err) {
-      console.error('Error fetching threads [INCREMENTAL]:', err);
+      console.error('Error fetching users [INCREMENTAL]:', err);
     }
   };
 
@@ -53,7 +53,7 @@ export const UsersComponent: FC = () => {
         setUsers(data);
         setIsLoading(false);
       } catch (err) {
-        console.error('Error fetching threads [INITIAL]:', err);
+        console.error('Error fetching users [INITIAL]:', err);
       }
     };
 
