@@ -17,6 +17,7 @@ export const UsersComponent: FC = () => {
   const initalUserCount = 10;
   const fetchMoreAmount = 5;
   const fetchLink = `${apiUrl}/getTopPeople`;
+  const initalSkip = 3;
 
   const fetchMoreThreads = async () => {
     if (dontFetch) return;
@@ -25,7 +26,7 @@ export const UsersComponent: FC = () => {
 
       const response = await axios.post(fetchLink, {
         limit: fetchMoreAmount,
-        start: skip
+        start: skip + initalSkip
       });
 
       const data = response.data;
@@ -46,7 +47,7 @@ export const UsersComponent: FC = () => {
       try {
         const response = await axios.post(fetchLink, {
           limit: initalUserCount,
-          start: 0
+          start: skip + initalSkip
         });
 
         const data = response.data;

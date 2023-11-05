@@ -17,6 +17,7 @@ export const AffiliationsComponent: FC = () => {
   const initialAffiliationCount = 10;
   const fetchMoreAmount = 5;
   const fetchLink = `${apiUrl}/getTopAffiliations`;
+  const initalSkip = 3;
 
   const fetchMoreThreads = async () => {
     if (dontFetch) return;
@@ -25,7 +26,7 @@ export const AffiliationsComponent: FC = () => {
 
       const response = await axios.post(fetchLink, {
         limit: fetchMoreAmount,
-        start: skip
+        start: skip + initalSkip
       });
 
       const data = response.data;
@@ -46,7 +47,7 @@ export const AffiliationsComponent: FC = () => {
       try {
         const response = await axios.post(fetchLink, {
           limit: initialAffiliationCount,
-          start: 0
+          start: initalSkip
         });
 
         const data = response.data;
