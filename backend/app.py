@@ -108,5 +108,14 @@ def getInfoByAff():
     return jsonify(data)
 
 
+@app.route("/getUnregisteredEmails", methods=["POST"])
+def getUnregisteredEmails():
+    try:
+        data = datastore.get_unregistered_emails()
+    except Exception as e:
+        return jsonify({"error": str(e)})
+    return ",".join(data)
+
+
 if __name__ == "__main__":
     app.run(debug=True)

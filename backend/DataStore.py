@@ -215,3 +215,24 @@ class DataStore:
         history.reverse()  # Gets the newest stuff first
 
         return {"MoneyRaised": totalMoneyRaised, "History": history}
+
+    def get_unregistered_emails(self) -> List[str]:
+        """
+        Gets a list of emails that are not registered in the registration sheet.
+        """
+        self.try_updating_cache()
+
+        registered_emails = self.registrations_cache
+
+        # Fetch all records from the money sheet
+        money_records = self.raw_money_cache
+
+        # Extract the affiliations's money raising history
+        unregistered_emails = [
+            record.get("Email")
+            for record in money_records
+            if "@" in str(record.get("Email"))
+            and record.get("Email") not in registered_emails
+        ]
+
+        return unregistered_emails
