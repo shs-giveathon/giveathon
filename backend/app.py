@@ -117,5 +117,14 @@ def getUnregisteredEmails():
     return ",".join(data)
 
 
+@app.route("/getAffiliationlessEmails", methods=["POST"])
+def getAffiliationlessEmails():
+    try:
+        data = datastore.get_affiliationless_emails()
+    except Exception as e:
+        return jsonify({"error": str(e)})
+    return ",".join(data)
+
+
 if __name__ == "__main__":
     app.run(debug=True)

@@ -219,6 +219,9 @@ class DataStore:
     def get_unregistered_emails(self) -> List[str]:
         """
         Gets a list of emails that are not registered in the registration sheet.
+
+        Returns:
+        - list: A list of emails that are not registered in the registration sheet.
         """
         self.try_updating_cache()
 
@@ -236,3 +239,37 @@ class DataStore:
         ]
 
         return unregistered_emails
+
+    def get_affiliationless_emails(self) -> List[str]:
+        """
+        Gets a list of emails from the registration sheet that have "N/A" for both teacher and club.
+
+        Returns:
+        - list: A list of emails from the registration sheet that have "N/A" for both teacher and club.
+        """
+        self.try_updating_cache()
+
+        # List to store emails with "N/A" as both teacher and club
+        affiliationless_emails = []
+
+        # Go through each record to check if both teacher and club are "N/A"
+        try:
+            records = self.reg_sheet.get_all_records()
+        except exceptions.APIError as e:
+            if e.response.status_code == 403:
+                raise Exception(
+                    "Permission denied to access registration sheet. Please make sure you have access to the sheet."
+                ) from e
+            raise
+
+        for registered_row in records:
+            email = registered_row.get("Email")
+            teacher = registered_row.get("Teacher")
+            period = registered_row.get("Period")
+            club = registered_row.get("Club")
+
+            # Check if both teacher and club are "N/A"
+            if email and (teacher == "N/A" or period == "N/A") and club == "N/A":
+                affiliationless_emails.append(email)
+
+        return affiliationless_emails
