@@ -11,6 +11,7 @@ class DataStore:
     affiliation_cache: List[Tuple[str, float]]
     # each entry is (email, {"MoneyRaised", "Name"})
     student_cache: List[Tuple[str, Dict[str, float | str]]]
+    total_raised_cache: float
     cache_ttl: int
     last_cache_update: datetime
 
@@ -22,6 +23,7 @@ class DataStore:
         self.reg_sheet = reg_sheet
         self.affiliation_cache = []
         self.student_cache = []
+        self.total_raised_cache = 0.0
         self.cache_ttl = cache_ttl
         self.last_cache_update = datetime.min
         self.raw_money_cache = []
@@ -31,6 +33,7 @@ class DataStore:
     def update_cache(self) -> None:
         self.affiliation_cache.clear()
         self.student_cache.clear()
+        self.total_raised_cache = 0.0
 
         registered_emails: Dict[str, Dict[str, str]] = {}
 
@@ -76,6 +79,8 @@ class DataStore:
             money_raised = float(money_raised_str)
             if money_raised <= 0.0 or email not in registered_emails:
                 continue
+
+            self.total_raised_cache += money_raised
 
             current_reg = registered_emails[email]
 
@@ -273,3 +278,7 @@ class DataStore:
                 affiliationless_emails.append(email)
 
         return affiliationless_emails
+    
+    def get_total_raised(self) -> float:
+        self.try_updating_cache()
+        return self.total_raised_cache

@@ -125,6 +125,11 @@ def getAffiliationlessEmails():
         return jsonify({"error": str(e)})
     return ",".join(data)
 
+@app.route("/getTotalRaised", methods=["POST"])
+@cross_origin()
+def getTotalRaised():
+    return str(datastore.get_total_raised())
+
 
 if __name__ == "__main__":
     app.run(debug=True)
