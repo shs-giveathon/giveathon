@@ -37,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='en'>
       <body dir='ltr' className={cn(font.className, 'text-white')}>
-        <div className='bg-hero w-full h-screen fixed'></div>
+        <div className='bg-hero bg-cover w-full h-screen fixed'></div>
         <Navbar />
         {children}
       </body>
