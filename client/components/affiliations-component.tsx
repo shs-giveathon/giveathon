@@ -26,7 +26,7 @@ export const AffiliationsComponent: FC = () => {
 
       const response = await axios.post(fetchLink, {
         limit: fetchMoreAmount,
-        start: skip + initalSkip
+        start: skip + initalSkip + initialAffiliationCount
       });
 
       const data = response.data;

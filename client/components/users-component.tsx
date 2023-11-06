@@ -26,7 +26,7 @@ export const UsersComponent: FC = () => {
 
       const response = await axios.post(fetchLink, {
         limit: fetchMoreAmount,
-        start: skip + initalSkip
+        start: skip + initalSkip + initalUserCount
       });
 
       const data = response.data;
@@ -47,7 +47,7 @@ export const UsersComponent: FC = () => {
       try {
         const response = await axios.post(fetchLink, {
           limit: initalUserCount,
-          start: skip + initalSkip
+          start: initalSkip
         });
 
         const data = response.data;
