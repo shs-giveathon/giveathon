@@ -1,0 +1,1 @@
+cd client && npm run dev & cd backend && python app.py
