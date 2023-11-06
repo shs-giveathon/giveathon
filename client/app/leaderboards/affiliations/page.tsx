@@ -44,12 +44,24 @@ const AffiliationsLeaderboardPage: NextPage = () => {
         <div className='fade-in glass-effect rounded-lg w-1/2 mx-auto font-headers text-center font-bold mt-4 text-3xl md:text-4xl lg:text-6xl'>GiveAThn Leaderboard</div>{' '}
         {/* unknown character is unique to this font - for styling purposes only */}
         <div className='w-[calc(100%-20px)] md:w-[80%] m-auto grid grid-flow-row gap-2'>
-          <div className='w-full grid grid-cols-[repeat(3,minmax(0,1fr))] gap-[6px] mt-2 lg:mt-6'>
+          <div className='relative w-full flex gap-[6px] mt-[70px] md:mt-[110px] items-end'>
             {data.length !== 0 && (
               <>
-                {data.length >= 2 && <LeaderboardAffilationTop3 name={data[1][0]} moneyRaised={data[1][1]} rank={2} animationDelay={200} />}
-                {data.length >= 1 && <LeaderboardAffilationTop3 name={data[0][0]} moneyRaised={data[0][1]} rank={1} animationDelay={100} />}
-                {data.length >= 3 && <LeaderboardAffilationTop3 name={data[2][0]} moneyRaised={data[2][1]} rank={3} animationDelay={300} />}
+                {data.length >= 2 && (
+                  <div className='h-[calc(100%+30px)] md:h-[calc(100%+50px)] w-full'>
+                    <LeaderboardAffilationTop3 name={data[1][0]} moneyRaised={data[1][1]} rank={2} animationDelay={200} />
+                  </div>
+                )}
+                {data.length >= 1 && (
+                  <div className='h-[calc(100%+60px)] md:h-[calc(100%+100px)] w-full'>
+                    <LeaderboardAffilationTop3 name={data[0][0]} moneyRaised={data[0][1]} rank={1} animationDelay={100} />
+                  </div>
+                )}
+                {data.length >= 3 && (
+                  <div className='h-max w-full'>
+                    <LeaderboardAffilationTop3 name={data[2][0]} moneyRaised={data[2][1]} rank={3} animationDelay={300} />
+                  </div>
+                )}
               </>
             )}
           </div>
