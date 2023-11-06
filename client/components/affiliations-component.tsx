@@ -19,7 +19,7 @@ export const AffiliationsComponent: FC = () => {
   const fetchLink = `${apiUrl}/getTopAffiliations`;
   const initalSkip = 3;
 
-  const fetchMoreThreads = async () => {
+  const fetchMoreAffiliations = async () => {
     if (dontFetch) return;
     try {
       setDontFetch(true);
@@ -43,7 +43,7 @@ export const AffiliationsComponent: FC = () => {
   };
 
   useEffect(() => {
-    const fetchThreads = async () => {
+    const fetchAffiliations = async () => {
       try {
         const response = await axios.post(fetchLink, {
           limit: initialAffiliationCount,
@@ -58,7 +58,7 @@ export const AffiliationsComponent: FC = () => {
       }
     };
 
-    fetchThreads();
+    fetchAffiliations();
   }, []);
 
   useEffect(() => {
@@ -68,7 +68,7 @@ export const AffiliationsComponent: FC = () => {
     const observer = new IntersectionObserver(
       entries => {
         if (entries[0].isIntersecting) {
-          fetchMoreThreads();
+          fetchMoreAffiliations();
         }
       },
       { threshold: 0.1 } // Adjust the threshold as needed

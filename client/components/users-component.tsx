@@ -19,7 +19,7 @@ export const UsersComponent: FC = () => {
   const fetchLink = `${apiUrl}/getTopPeople`;
   const initalSkip = 3;
 
-  const fetchMoreThreads = async () => {
+  const fetchMoreUsers = async () => {
     if (dontFetch) return;
     try {
       setDontFetch(true);
@@ -43,7 +43,7 @@ export const UsersComponent: FC = () => {
   };
 
   useEffect(() => {
-    const fetchThreads = async () => {
+    const fetchUsers = async () => {
       try {
         const response = await axios.post(fetchLink, {
           limit: initalUserCount,
@@ -58,7 +58,7 @@ export const UsersComponent: FC = () => {
       }
     };
 
-    fetchThreads();
+    fetchUsers();
   }, []);
 
   useEffect(() => {
@@ -68,7 +68,7 @@ export const UsersComponent: FC = () => {
     const observer = new IntersectionObserver(
       entries => {
         if (entries[0].isIntersecting) {
-          fetchMoreThreads();
+          fetchMoreUsers();
         }
       },
       { threshold: 0.1 } // Adjust the threshold as needed
