@@ -48,17 +48,19 @@ const UserIdPage: NextPage = () => {
               </Link>
               <p>History</p>
               <div>
-                {data.History.map((h: any) => {
-                  return (
-                    <div className='grid grid-flow-col' key={`${h[0]}-${h[1]}`}>
-                      <div className='grid grid-cols-[max-content_max-content] mr-auto gap-2 place-items-center'>
-                        <p className='mr-auto font-semibold'>{decodeURIComponent(params.userId as string)}</p>
-                        <p className='mr-auto text-sm'>{formatDate(h[0])}</p>
+                {data.History.slice()
+                  .reverse()
+                  .map((h: any) => {
+                    return (
+                      <div className='grid grid-flow-col' key={`${h[0]}-${h[1]}`}>
+                        <div className='grid grid-cols-[max-content_max-content] mr-auto gap-2 place-items-center'>
+                          <p className='mr-auto font-semibold'>{decodeURIComponent(params.userId as string)}</p>
+                          <p className='mr-auto text-sm'>{formatDate(h[0])}</p>
+                        </div>
+                        <p className='ml-auto'>${h[1].toFixed(2)}</p>
                       </div>
-                      <p className='ml-auto'>${h[1].toFixed(2)}</p>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
               </div>
             </div>
           ) : (
