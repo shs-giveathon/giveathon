@@ -26,9 +26,14 @@ CACHE_DELAY = 60  # in seconds
 datastore = DataStore(moneyWorksheet, registrationWorksheet, CACHE_DELAY)
 
 
+@app.route("/", methods=["GET"])
+def index():
+    return "Welcome to the backend! Please leave."
+
+
 @app.route("/getTopPeople", methods=["POST"])
 @cross_origin()
-def index():
+def peoIndex():
     # Set the default parameters
     limit = 10
     start = 0
@@ -124,6 +129,7 @@ def getAffiliationlessEmails():
     except Exception as e:
         return jsonify({"error": str(e)})
     return ",".join(data)
+
 
 @app.route("/getTotalRaised", methods=["POST"])
 @cross_origin()
