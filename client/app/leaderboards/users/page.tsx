@@ -23,7 +23,7 @@ const UsersLeaderboardPage: NextPage = () => {
     };
 
     fetchData();
-  });
+  }, []);
 
   if (!data)
     return (
