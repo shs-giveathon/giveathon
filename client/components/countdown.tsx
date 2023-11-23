@@ -1,3 +1,5 @@
+'use client';
+
 import { FC, useState, useEffect } from 'react';
 
 export const Countdown: FC = () => {

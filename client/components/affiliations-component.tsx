@@ -19,31 +19,8 @@ export const AffiliationsComponent: FC = () => {
   const fetchLink = `${apiUrl}/getTopAffiliations`;
   const initalSkip = 3;
 
-  const fetchMoreAffiliations = async () => {
-    if (dontFetch) return;
-    try {
-      setDontFetch(true);
-
-      const response = await axios.post(fetchLink, {
-        limit: fetchMoreAmount,
-        start: skip + initalSkip + initialAffiliationCount
-      });
-
-      const data = response.data;
-      setAffiliations(prevAffiliations => [...prevAffiliations, ...data]);
-      setSkip(prevSkip => prevSkip + fetchMoreAmount);
-      if (data.length === 0) {
-        setDontFetch(true);
-        return;
-      }
-      setDontFetch(false);
-    } catch (err) {
-      console.error('Error fetching affiliations [INCREMENTAL]:', err);
-    }
-  };
-
   useEffect(() => {
-    const fetchAffiliations = async () => {
+    const fetchUsers = async () => {
       try {
         const response = await axios.post(fetchLink, {
           limit: initialAffiliationCount,
@@ -54,21 +31,44 @@ export const AffiliationsComponent: FC = () => {
         setAffiliations(data);
         setIsLoading(false);
       } catch (err) {
-        console.error('Error fetching affiliations [INITIAL]:', err);
+        console.error('Error fetching users [INITIAL]:', err);
       }
     };
 
-    fetchAffiliations();
-  }, []);
+    fetchUsers();
+  }, [fetchLink]);
 
   useEffect(() => {
+    const fetchMoreUsers = async () => {
+      if (dontFetch) return;
+      try {
+        setDontFetch(true);
+
+        const response = await axios.post(fetchLink, {
+          limit: fetchMoreAmount,
+          start: skip + initalSkip + initialAffiliationCount
+        });
+
+        const data = response.data;
+        setAffiliations(prevAffiliations => [...prevAffiliations, ...data]);
+        setSkip(prevSkip => prevSkip + fetchMoreAmount);
+        if (data.length === 0) {
+          setDontFetch(true);
+          return;
+        }
+        setDontFetch(false);
+      } catch (err) {
+        console.error('Error fetching users [INCREMENTAL]:', err);
+      }
+    };
+
     const container = lastElementRef.current;
     if (!container) return;
 
     const observer = new IntersectionObserver(
       entries => {
         if (entries[0].isIntersecting) {
-          fetchMoreAffiliations();
+          fetchMoreUsers();
         }
       },
       { threshold: 0.1 } // Adjust the threshold as needed
@@ -79,7 +79,9 @@ export const AffiliationsComponent: FC = () => {
     return () => {
       observer.disconnect();
     };
-  }, [affiliations, skip]);
+  }, [affiliations, skip, dontFetch, fetchLink]);
+
+  if (isLoading) return null;
 
   return (
     <div className='fade-in glass-effect rounded-lg px-4 text-xl mb-[60px] p-2' style={{ animationDelay: '400ms' }}>

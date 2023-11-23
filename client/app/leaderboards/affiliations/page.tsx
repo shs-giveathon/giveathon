@@ -20,7 +20,7 @@ const AffiliationsLeaderboardPage: NextPage = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      const response = await axios.post(`${apiUrl}/getTopAffiliations`);
+      const response = await axios.post(`${apiUrl}/getTopAffiliations`, { limit: 3, start: 0 });
       setData(response.data);
     };
     fetch();

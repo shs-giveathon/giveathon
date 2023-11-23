@@ -1,30 +1,29 @@
 'use client';
 
-import { LeaderboardRow } from '@/components/leaderboard-row';
 import { LeaderboardTop3 } from '@/components/leaderboard-top-3';
 import { getApiUrl } from '@/lib/api-url';
 import { NextPage } from 'next';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 import loadingSpinner from '@/public/spinner.svg';
 import { UsersComponent } from '@/components/users-component';
 import axios from 'axios';
 import { Countdown } from '@/components/countdown';
+import { useEffect, useState } from 'react';
 
 export type PersonData = [string, { MoneyRaised: number; Name: string }];
 
 const UsersLeaderboardPage: NextPage = () => {
   const apiUrl = getApiUrl();
-
-  const [data, setData] = useState<PersonData[] | null>(null);
+  const [data, setData] = useState<PersonData[] | null>([]);
 
   useEffect(() => {
-    const fetch = async () => {
-      const response = await axios.post(`${apiUrl}/getTopPeople`);
+    const fetchData = async () => {
+      const response = await axios.post(`${apiUrl}/getTopPeople`, { limit: 3, start: 0 });
       setData(response.data);
     };
-    fetch();
-  }, []);
+
+    fetchData();
+  });
 
   if (!data)
     return (
