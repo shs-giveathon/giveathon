@@ -15,15 +15,23 @@ export type PersonData = [string, { MoneyRaised: number; Name: string }];
 const UsersLeaderboardPage: NextPage = () => {
   const apiUrl = getApiUrl();
   const [data, setData] = useState<PersonData[] | null>([]);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     const fetchData = async () => {
-      const response = await axios.post(`${apiUrl}/getTopPeople`, { limit: 3, start: 0 });
-      setData(response.data);
+      try {
+        const response = await axios.post(`${apiUrl}/getTopPeople`, { limit: 3, start: 0 });
+        setData(response.data);
+      } catch (err) {
+        console.error('Error:', err);
+      }
     };
 
     fetchData();
   }, []);
+
+  if (!isMounted) return null;
 
   if (!data)
     return (

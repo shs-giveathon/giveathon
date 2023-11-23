@@ -15,16 +15,24 @@ export type AffiliationData = [string, number];
 
 const AffiliationsLeaderboardPage: NextPage = () => {
   const apiUrl = getApiUrl();
-
   const [data, setData] = useState<AffiliationData[] | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    const fetch = async () => {
-      const response = await axios.post(`${apiUrl}/getTopAffiliations`, { limit: 3, start: 0 });
-      setData(response.data);
+    setIsMounted(true);
+    const fetchData = async () => {
+      try {
+        const response = await axios.post(`${apiUrl}/getTopAffiliations`, { limit: 3, start: 0 });
+        setData(response.data);
+      } catch (err) {
+        console.error('Error:', err);
+      }
     };
-    fetch();
+
+    fetchData();
   }, []);
+
+  if (!isMounted) return null;
 
   if (!data)
     return (
