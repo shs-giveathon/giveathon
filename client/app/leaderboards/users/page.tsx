@@ -2,7 +2,7 @@
 
 import { LeaderboardRow } from '@/components/leaderboard-row';
 import { LeaderboardTop3 } from '@/components/leaderboard-top-3';
-import { getApiUrl } from '@/hooks/api-url';
+import { getApiUrl } from '@/lib/api-url';
 import { NextPage } from 'next';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';

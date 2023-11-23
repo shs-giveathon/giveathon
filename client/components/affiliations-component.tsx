@@ -2,7 +2,7 @@
 
 import { FC, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { getApiUrl } from '@/hooks/api-url';
+import { getApiUrl } from '@/lib/api-url';
 import { LeaderboardAffiliationRow } from '@/components/leaderboard-a-row';
 import { AffiliationData } from '@/app/leaderboards/affiliations/page';
 

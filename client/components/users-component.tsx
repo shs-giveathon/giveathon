@@ -4,7 +4,7 @@ import { FC, useEffect, useRef, useState } from 'react';
 import { LeaderboardRow } from '@/components/leaderboard-row';
 import { PersonData } from '@/app/leaderboards/users/page';
 import axios from 'axios';
-import { getApiUrl } from '@/hooks/api-url';
+import { getApiUrl } from '@/lib/api-url';
 
 export const UsersComponent: FC = () => {
   const [users, setUsers] = useState<PersonData[]>([]);
@@ -18,29 +18,6 @@ export const UsersComponent: FC = () => {
   const fetchMoreAmount = 5;
   const fetchLink = `${apiUrl}/getTopPeople`;
   const initalSkip = 3;
-
-  const fetchMoreUsers = async () => {
-    if (dontFetch) return;
-    try {
-      setDontFetch(true);
-
-      const response = await axios.post(fetchLink, {
-        limit: fetchMoreAmount,
-        start: skip + initalSkip + initalUserCount
-      });
-
-      const data = response.data;
-      setUsers(prevUsers => [...prevUsers, ...data]);
-      setSkip(prevSkip => prevSkip + fetchMoreAmount);
-      if (data.length === 0) {
-        setDontFetch(true);
-        return;
-      }
-      setDontFetch(false);
-    } catch (err) {
-      console.error('Error fetching users [INCREMENTAL]:', err);
-    }
-  };
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -59,9 +36,32 @@ export const UsersComponent: FC = () => {
     };
 
     fetchUsers();
-  }, []);
+  }, [fetchLink]);
 
   useEffect(() => {
+    const fetchMoreUsers = async () => {
+      if (dontFetch) return;
+      try {
+        setDontFetch(true);
+
+        const response = await axios.post(fetchLink, {
+          limit: fetchMoreAmount,
+          start: skip + initalSkip + initalUserCount
+        });
+
+        const data = response.data;
+        setUsers(prevUsers => [...prevUsers, ...data]);
+        setSkip(prevSkip => prevSkip + fetchMoreAmount);
+        if (data.length === 0) {
+          setDontFetch(true);
+          return;
+        }
+        setDontFetch(false);
+      } catch (err) {
+        console.error('Error fetching users [INCREMENTAL]:', err);
+      }
+    };
+
     const container = lastElementRef.current;
     if (!container) return;
 
@@ -79,7 +79,9 @@ export const UsersComponent: FC = () => {
     return () => {
       observer.disconnect();
     };
-  }, [users, skip]);
+  }, [users, skip, dontFetch, fetchLink]);
+
+  if (isLoading) return null;
 
   return (
     <div className='fade-in glass-effect rounded-lg px-4 text-xl mb-[60px] p-2' style={{ animationDelay: '400ms' }}>

@@ -1,7 +1,7 @@
 'use client';
 
 import { NextPage } from 'next';
-import { getApiUrl } from '@/hooks/api-url';
+import { getApiUrl } from '@/lib/api-url';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import loadingSpinner from '@/public/spinner.svg';
