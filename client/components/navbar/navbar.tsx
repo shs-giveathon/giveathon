@@ -6,6 +6,7 @@ import { ExternalLink, Menu, User, Users } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { isGiveathon } from '@/app/page';
 
 const navItems = [
   {
@@ -23,6 +24,7 @@ const navItems = [
 export const Navbar: FC = () => {
   const pathname = usePathname() || '/';
 
+  if (!isGiveathon) return;
   return (
     <div className='glass-effect !border-x-0 !border-t-0 py-2 px-4 w-full flex gap-2 fixed z-50'>
       <div className='hidden md:grid grid-cols-[max-content_auto] w-full place-items-center'>
