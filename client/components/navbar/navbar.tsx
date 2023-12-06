@@ -6,7 +6,7 @@ import { ExternalLink, Menu, User, Users } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { isGiveathon } from '@/app/page';
+import isGiveathon from '@/utils/isGiveathon';
 
 const navItems = [
   {

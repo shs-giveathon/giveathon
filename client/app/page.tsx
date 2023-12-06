@@ -1,7 +1,6 @@
 import { NextPage } from 'next';
 import { redirect } from 'next/navigation';
-
-export const isGiveathon = false;
+import isGiveathon from '@/utils/isGiveathon';
 
 const Home: NextPage = () => {
   if (isGiveathon) {
