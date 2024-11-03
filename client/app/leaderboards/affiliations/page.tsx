@@ -22,7 +22,7 @@ const AffiliationsLeaderboardPage: NextPage = () => {
     setIsMounted(true);
     const fetchData = async () => {
       try {
-        const response = await axios.post(`${apiUrl}/getTopAffiliations`, { limit: 3, start: 0 });
+        const response = await axios.get(`${apiUrl}/getTopAffiliations`, { limit: 3, start: 0 });
         setData(response.data);
       } catch (err) {
         console.error('Error:', err);
