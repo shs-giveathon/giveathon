@@ -5,8 +5,8 @@ import { FC, useState, useEffect } from 'react';
 export const Countdown: FC = () => {
   const calculateTimeLeft = () => {
     const now = new Date();
-    const endOfNovember2023 = new Date(2023, 10, 30, 23, 59, 59); // November
-    const difference = endOfNovember2023.getTime() - now.getTime();
+    const endOfGiveathon2024 = new Date(2024, 11, 2, 23, 59, 59); // Month is 0-indexed (December = 11)
+    const difference = endOfGiveathon2024.getTime() - now.getTime();
 
     let days = 0;
     let hours = 0;

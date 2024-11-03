@@ -42,7 +42,7 @@ export const Navbar: FC = () => {
             );
           })}
         </div>
-        <Link target='_blank' href='https://docs.google.com/document/d/1-fvu3G89BqQeepY1A9rA0Iz72FGM8v1svccmArKnPLk/edit?usp=sharing' className='ml-auto'>
+        <Link target='_blank' href='https://docs.google.com/document/d/1lJrROnj5CDimESUEUlfRy6Mz8D6m8osyQiA6KOZYgMY/edit?tab=t.0' className='ml-auto'>
           <button className='px-2 py-1 rounded-md relative no-underline bg-emerald-500 hover:bg-emerald-600 transition'>
             <div className='grid grid-cols-[auto_max-content] gap-1 place-items-center'>
               <span>Submit Fundraising</span>

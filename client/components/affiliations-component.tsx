@@ -22,7 +22,7 @@ export const AffiliationsComponent: FC = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(fetchLink, {
+        const response = await axios.post(fetchLink, {
           limit: initialAffiliationCount,
           start: initalSkip
         });
@@ -44,7 +44,7 @@ export const AffiliationsComponent: FC = () => {
       try {
         setDontFetch(true);
 
-        const response = await axios.get(fetchLink, {
+        const response = await axios.post(fetchLink, {
           limit: fetchMoreAmount,
           start: skip + initalSkip + initialAffiliationCount
         });

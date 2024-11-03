@@ -1,3 +1,3 @@
-const isGiveathon = false
+const isGiveathon = true;
 
 export default isGiveathon;

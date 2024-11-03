@@ -20,7 +20,7 @@ const AffiliationIdPage: NextPage = () => {
 
   useEffect(() => {
     fetch(`${apiUrl}/getInfoByAffiliation`, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },

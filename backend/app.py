@@ -26,12 +26,12 @@ CACHE_DELAY = 60  # in seconds
 datastore = DataStore(moneyWorksheet, registrationWorksheet, CACHE_DELAY)
 
 
-@app.route("/", methods=["GET"])
+@app.route("/", methods=["POST"])
 def index():
     return "Welcome to the backend! Please leave."
 
 
-@app.route("/getTopPeople", methods=["GET"])
+@app.route("/getTopPeople", methods=["POST"])
 @cross_origin()
 def peoIndex():
     # Set the default parameters
@@ -55,7 +55,7 @@ def peoIndex():
     return jsonify(data)
 
 
-@app.route("/getTopAffiliations", methods=["GET"])
+@app.route("/getTopAffiliations", methods=["POST"])
 @cross_origin()
 def affIndex():
     # Set the default parameters
@@ -79,7 +79,7 @@ def affIndex():
     return jsonify(data)
 
 
-@app.route("/getInfoByEmail", methods=["GET"])
+@app.route("/getInfoByEmail", methods=["POST"])
 @cross_origin()
 def getInfoByEmail():
     try:
@@ -96,7 +96,7 @@ def getInfoByEmail():
     return jsonify(data)
 
 
-@app.route("/getInfoByAffiliation", methods=["GET"])
+@app.route("/getInfoByAffiliation", methods=["POST"])
 @cross_origin()
 def getInfoByAff():
     try:
@@ -113,7 +113,7 @@ def getInfoByAff():
     return jsonify(data)
 
 
-@app.route("/getUnregisteredEmails", methods=["GET"])
+@app.route("/getUnregisteredEmails", methods=["POST"])
 def getUnregisteredEmails():
     try:
         data = datastore.get_unregistered_emails()
@@ -122,7 +122,7 @@ def getUnregisteredEmails():
     return ",".join(data)
 
 
-@app.route("/getAffiliationlessEmails", methods=["GET"])
+@app.route("/getAffiliationlessEmails", methods=["POST"])
 def getAffiliationlessEmails():
     try:
         data = datastore.get_affiliationless_emails()
@@ -131,7 +131,7 @@ def getAffiliationlessEmails():
     return ",".join(data)
 
 
-@app.route("/getTotalRaised", methods=["GET"])
+@app.route("/getTotalRaised", methods=["POST"])
 @cross_origin()
 def getTotalRaised():
     return str(datastore.get_total_raised())
