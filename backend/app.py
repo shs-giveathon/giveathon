@@ -16,7 +16,7 @@ scopes = [
 creds = Credentials.from_service_account_file("serviceAccount.json", scopes=scopes)
 gc = authorize(creds)
 sh = gc.open_by_url(
-    "https://docs.google.com/spreadsheets/d/16Hnls_-qXFapfP3n-qeKCwWWQzD-1ftP05V0svHS70k/edit?usp=sharing"
+    "https://docs.google.com/spreadsheets/d/1TS_VyZPebnTnjuAI3GIOLZn9Pe3eVCnLaw2wxqir6qI/"
 )
 moneyWorksheet = sh.worksheet("MoneyForm")
 registrationWorksheet = sh.worksheet("RegistrationForm")
@@ -31,7 +31,7 @@ def index():
     return "Welcome to the backend! Please leave."
 
 
-@app.route("/getTopPeople", methods=["POST"])
+@app.route("/getTopPeople", methods=["GET"])
 @cross_origin()
 def peoIndex():
     # Set the default parameters
@@ -55,7 +55,7 @@ def peoIndex():
     return jsonify(data)
 
 
-@app.route("/getTopAffiliations", methods=["POST"])
+@app.route("/getTopAffiliations", methods=["GET"])
 @cross_origin()
 def affIndex():
     # Set the default parameters
@@ -79,7 +79,7 @@ def affIndex():
     return jsonify(data)
 
 
-@app.route("/getInfoByEmail", methods=["POST"])
+@app.route("/getInfoByEmail", methods=["GET"])
 @cross_origin()
 def getInfoByEmail():
     try:
@@ -96,7 +96,7 @@ def getInfoByEmail():
     return jsonify(data)
 
 
-@app.route("/getInfoByAffiliation", methods=["POST"])
+@app.route("/getInfoByAffiliation", methods=["GET"])
 @cross_origin()
 def getInfoByAff():
     try:
@@ -113,7 +113,7 @@ def getInfoByAff():
     return jsonify(data)
 
 
-@app.route("/getUnregisteredEmails", methods=["POST"])
+@app.route("/getUnregisteredEmails", methods=["GET"])
 def getUnregisteredEmails():
     try:
         data = datastore.get_unregistered_emails()
@@ -122,7 +122,7 @@ def getUnregisteredEmails():
     return ",".join(data)
 
 
-@app.route("/getAffiliationlessEmails", methods=["POST"])
+@app.route("/getAffiliationlessEmails", methods=["GET"])
 def getAffiliationlessEmails():
     try:
         data = datastore.get_affiliationless_emails()
@@ -131,7 +131,7 @@ def getAffiliationlessEmails():
     return ",".join(data)
 
 
-@app.route("/getTotalRaised", methods=["POST"])
+@app.route("/getTotalRaised", methods=["GET"])
 @cross_origin()
 def getTotalRaised():
     return str(datastore.get_total_raised())
