@@ -104,10 +104,11 @@ class DataStore:
         teacher = row.get("Teacher")
         period = row.get("Period")
         club = row.get("Club")
+        choice = row.get("Choice")
 
-        if teacher and period and teacher != "N/A" and period != "N/A":
+        if choice == "Class Period":
             return f"{teacher}'s {period} Period"
-        elif club and club != "N/A":
+        elif choice == "Club":
             return club
         return ""
 
@@ -278,7 +279,7 @@ class DataStore:
                 affiliationless_emails.append(email)
 
         return affiliationless_emails
-    
+
     def get_total_raised(self) -> float:
         self.try_updating_cache()
         return self.total_raised_cache
