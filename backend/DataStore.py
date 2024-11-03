@@ -39,6 +39,9 @@ class DataStore:
 
         try:
             records = self.reg_sheet.get_all_records()
+            self._fix_column_names(self.reg_sheet)
+            self._fix_column_names(self.money_sheet)
+            records = self.reg_sheet.get_all_records()
         except exceptions.APIError as e:
             if e.response.status_code == 403:
                 raise Exception(
@@ -283,3 +286,36 @@ class DataStore:
     def get_total_raised(self) -> float:
         self.try_updating_cache()
         return self.total_raised_cache
+
+    def _fix_column_names(self, sheet) -> None:
+        """
+        Fixes the column names in the money sheet to match the expected format.
+
+        Money Sheet Columns:
+        Timestamp | Email | Money Raised | Honesty Statement
+
+        Registration Sheet Columns:
+        Timestamp | Email | Name | Choice | Teacher Period | Club
+        """
+        if sheet.title == "MoneyForm":
+            sheet.update(
+                "A1:D1",
+                [["Timestamp", "Email", "Money Raised", "Honesty Statement"]],
+            )
+        elif sheet.title == "RegistrationForm":
+            sheet.update(
+                "A1:G1",
+                [
+                    [
+                        "Timestamp",
+                        "Email",
+                        "Name",
+                        "Choice",
+                        "Teacher",
+                        "Period",
+                        "Club",
+                    ]
+                ],
+            )
+        else:
+            raise ValueError("Invalid sheet name provided.")
