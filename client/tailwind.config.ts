@@ -14,7 +14,7 @@ const config: Config = {
       headers: ['"Comeback Home"', 'sans-serif']
     },
     backgroundImage: {
-      hero: "url('/timessquare.webp')"
+      hero: "url('/baozi.webp')"
     },
     extend: {
       colors: {
