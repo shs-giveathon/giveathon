@@ -33,7 +33,7 @@ export const Navbar: FC = () => {
             const isActive = item.path === pathname;
 
             return (
-              <Link key={item.path} className={cn('px-2 py-1 rounded-md relative no-underline transition', isActive && 'bg-gray-500')} data-active={isActive} href={item.path}>
+              <Link key={item.path} className={cn('px-2 py-1 rounded-md relative no-underline transition', isActive && 'bg-yellow-400')} data-active={isActive} href={item.path}>
                 <div className='grid grid-cols-[max-content_auto] gap-1 place-items-center text-white'>
                   {item.icon}
                   <span>{item.name}</span>

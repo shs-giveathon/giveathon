@@ -11,10 +11,10 @@ const config: Config = {
       }
     },
     fontFamily: {
-      headers: ['"Comeback Home"', 'sans-serif']
+      headers: ['"Roundo"', 'sans-serif']
     },
     backgroundImage: {
-      hero: "url('/timessquare.webp')"
+      hero: "url('/minions.jpg')"
     },
     extend: {
       colors: {

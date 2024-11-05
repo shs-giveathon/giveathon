@@ -14,7 +14,7 @@ export const LeaderboardRow: FC<LeaderboardRowProps> = ({ name, email, moneyRais
     <Link href={`/user/${email}`}>
       <div className={cn('mb-1 grid grid-cols-[1fr_max-content_1fr] p-2 rounded-md', rank % 2 === 0 && 'bg-black/20')}>
         <div>
-          <h1 className='font-headers font-semibold mr-auto'>{rank}.</h1>
+          <h1 className='font-headers mr-auto'>{rank}.</h1>
         </div>
         <div>
           <h1 className=' text-green-500 text-center'>${moneyRaised.toFixed(2)}</h1>

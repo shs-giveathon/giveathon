@@ -49,7 +49,7 @@ const UsersLeaderboardPage: NextPage = () => {
   return (
     <>
       <div className='w-full h-screen pt-16'>
-        <div className='fade-in glass-effect rounded-lg w-1/2 mx-auto font-headers text-center font-bold mt-4 text-3xl md:text-4xl lg:text-6xl'>GiveAThn Leaderboard</div>{' '}
+        <div className='fade-in glass-effect rounded-lg w-1/2 mx-auto font-headers text-center mt-4 text-3xl md:text-4xl lg:text-6xl'>GiveAThon Leaderboard</div>{' '}
         {/* unknown character is unique to this font - for styling purposes only */}
         <div className='w-[calc(100%-20px)] mt-4 md:mt-8 md:w-[80%] m-auto grid grid-flow-row gap-2'>
           <Countdown />
