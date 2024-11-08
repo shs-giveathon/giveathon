@@ -6,10 +6,10 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import loadingSpinner from '@/public/spinner.svg';
 import { LeaderboardAffilationTop3 } from '@/components/leaderboard-a-top-3';
-import { LeaderboardAffiliationRow } from '@/components/leaderboard-a-row';
 import axios from 'axios';
 import { AffiliationsComponent } from '@/components/affiliations-component';
 import Countdown from '@/components/countdown';
+import { TotalRaised } from '@/components/total-raised';
 
 export type AffiliationData = [string, number];
 
@@ -54,6 +54,7 @@ const AffiliationsLeaderboardPage: NextPage = () => {
         {/* unknown character is unique to this font - for styling purposes only */}
         <div className='w-[calc(100%-20px)] mt-4 md:mt-8 md:w-[80%] m-auto grid grid-flow-row gap-2'>
           <Countdown />
+          <TotalRaised />
           <div className='relative w-full flex gap-[6px] mt-[70px] md:mt-[125px] items-end'>
             {data.length !== 0 && (
               <>
