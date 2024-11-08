@@ -32,7 +32,7 @@ export const RecentDonations: FC = () => {
   return (
     <div className='fade-in glass-effect rounded-lg p-4 text-center mx-auto mt-4'>
       <h2 className='text-2xl font-bold mb-4'>Recent Donations</h2>
-      <div className='grid grid-cols-1 gap-2'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
         {donations.map((donation, index) => (
           <div key={index} className='flex justify-between items-center px-4 py-2 bg-black/20 rounded-lg'>
             <div className='flex-1 text-left'>{donation.name}</div>
