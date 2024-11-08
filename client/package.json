@@ -19,7 +19,8 @@
     "react": "latest",
     "react-dom": "latest",
     "tailwind-merge": "^1.14.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "timeago.js": "^4.0.2"
   },
   "devDependencies": {
     "@types/node": "latest",
