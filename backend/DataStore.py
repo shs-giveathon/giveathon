@@ -35,7 +35,6 @@ class DataStore:
     def update_cache(self) -> None:
         self.affiliation_cache.clear()
         self.student_cache.clear()
-        self.total_raised_cache = 0.0
 
         registered_emails: Dict[str, Dict[str, str]] = {}
 
@@ -71,6 +70,13 @@ class DataStore:
         student_dict: Dict[str, Dict[str, str | float]] = {}
         affiliation_dict = defaultdict(float)
 
+        # Calculate total raised using sum
+        self.total_raised_cache = sum(
+            float(row.get("Money Raised", 0))
+            for row in self.raw_money_cache
+            if str(row.get("Money Raised", "")).replace(".", "", 1).isdigit()
+        )
+
         for row in self.raw_money_cache:
             email = str(row.get("Email", ""))
             money_raised_str = str(row.get("Money Raised", ""))
@@ -84,8 +90,6 @@ class DataStore:
             money_raised = float(money_raised_str)
             if money_raised <= 0.0 or email not in registered_emails:
                 continue
-
-            self.total_raised_cache += money_raised
 
             current_reg = registered_emails[email]
 
