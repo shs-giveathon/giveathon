@@ -14,7 +14,7 @@ const config: Config = {
       headers: ['"Roundo"', 'sans-serif']
     },
     backgroundImage: {
-      hero: "url('/minions.jpg')"
+      hero: "url('/minions.webp')"
     },
     extend: {
       colors: {
