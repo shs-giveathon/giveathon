@@ -17,6 +17,7 @@ class DataStore:
 
     raw_money_cache: List[Dict[Any, Any]]
     registrations_cache: Dict[str, Dict[str, str]]
+    recent_donations_cache: List[Dict[str, Any]]
 
     def __init__(self, money_sheet: Worksheet, reg_sheet: Worksheet, cache_ttl: int):
         self.money_sheet = money_sheet
@@ -28,6 +29,7 @@ class DataStore:
         self.last_cache_update = datetime.min
         self.raw_money_cache = []
         self.registrations_cache = {}
+        self.recent_donations_cache = []
         self.update_cache()
 
     def update_cache(self) -> None:
@@ -102,6 +104,25 @@ class DataStore:
         self.affiliation_cache = sorted(
             affiliation_dict.items(), key=lambda item: item[1], reverse=True
         )
+
+        # Update recent donations cache
+        recent_donations = [
+            {
+                "timestamp": record.get("Timestamp"),
+                "amount": float(record.get("Money Raised")),
+                "name": registered_emails.get(record.get("Email", ""), {}).get(
+                    "Name", "Unknown"
+                ),
+                "affiliation": registered_emails.get(record.get("Email", ""), {}).get(
+                    "Affiliation", "Unregistered"
+                ),
+            }
+            for record in self.raw_money_cache
+            if record.get("Money Raised")
+            and str(record.get("Money Raised")).replace(".", "", 1).isdigit()
+        ]
+        recent_donations.reverse()
+        self.recent_donations_cache = recent_donations
 
     def _get_affiliation_from_row(self, row: Dict[str, str]) -> str:
         teacher = row.get("Teacher")
@@ -286,6 +307,19 @@ class DataStore:
     def get_total_raised(self) -> float:
         self.try_updating_cache()
         return self.total_raised_cache
+
+    def get_recent_donations(self, limit: int = 10) -> List[Dict[str, Any]]:
+        """
+        Gets the most recent donations with donor information from cache.
+
+        Args:
+        - limit (int): Maximum number of recent donations to return
+
+        Returns:
+        - list: A list of dictionaries containing timestamp, amount, and donor info
+        """
+        self.try_updating_cache()
+        return self.recent_donations_cache[:limit]
 
     def _fix_column_names(self, sheet) -> None:
         """

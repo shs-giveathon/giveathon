@@ -137,5 +137,21 @@ def getTotalRaised():
     return str(datastore.get_total_raised())
 
 
+@app.route("/getRecentDonations", methods=["POST"])
+@cross_origin()
+def getRecentDonations():
+    try:
+        json = request.get_json()
+    except:
+        json = {}
+    limit = int(json.get("limit", 10))
+
+    try:
+        data = datastore.get_recent_donations(limit)
+    except Exception as e:
+        return jsonify({"error": str(e)})
+    return jsonify(data)
+
+
 if __name__ == "__main__":
     app.run(debug=True)

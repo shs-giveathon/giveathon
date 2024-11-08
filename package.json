@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "million": "^2.6.4"
+    "million": "^2.6.4",
+    "timeago.js": "^4.0.2"
   }
 }

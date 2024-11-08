@@ -10,6 +10,7 @@ import axios from 'axios';
 import { AffiliationsComponent } from '@/components/affiliations-component';
 import Countdown from '@/components/countdown';
 import { TotalRaised } from '@/components/total-raised';
+import { RecentDonations } from '@/components/recent-donations';
 
 export type AffiliationData = [string, number];
 
@@ -55,6 +56,7 @@ const AffiliationsLeaderboardPage: NextPage = () => {
         <div className='w-[calc(100%-20px)] mt-4 md:mt-8 md:w-[80%] m-auto grid grid-flow-row gap-2'>
           <Countdown />
           <TotalRaised />
+          <RecentDonations />
           <div className='relative w-full flex gap-[6px] mt-[70px] md:mt-[125px] items-end'>
             {data.length !== 0 && (
               <>

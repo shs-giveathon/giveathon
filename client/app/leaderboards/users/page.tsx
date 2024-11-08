@@ -10,6 +10,7 @@ import axios from 'axios';
 import { Countdown } from '@/components/countdown';
 import { useEffect, useState } from 'react';
 import { TotalRaised } from '@/components/total-raised';
+import { RecentDonations } from '@/components/recent-donations';
 
 export type PersonData = [string, { MoneyRaised: number; Name: string }];
 
@@ -54,6 +55,7 @@ const UsersLeaderboardPage: NextPage = () => {
         {/* unknown character is unique to this font - for styling purposes only */}
         <div className='w-[calc(100%-20px)] mt-4 md:mt-8 md:w-[80%] m-auto grid grid-flow-row gap-2'>
           <TotalRaised />
+          <RecentDonations />
           <Countdown />
           <div className='relative w-full flex gap-[6px] mt-[70px] md:mt-[125px] items-end'>
             {data.length !== 0 && (
