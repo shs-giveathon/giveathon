@@ -54,9 +54,9 @@ const UsersLeaderboardPage: NextPage = () => {
         <div className='fade-in glass-effect rounded-lg w-1/2 mx-auto font-headers text-center mt-4 text-3xl md:text-4xl lg:text-6xl'>GiveAThon Leaderboard</div>{' '}
         {/* unknown character is unique to this font - for styling purposes only */}
         <div className='w-[calc(100%-20px)] mt-4 md:mt-8 md:w-[80%] m-auto grid grid-flow-row gap-2'>
+          <Countdown />
           <TotalRaised />
           <RecentDonations />
-          <Countdown />
           <div className='relative w-full flex gap-[6px] mt-[70px] md:mt-[125px] items-end'>
             {data.length !== 0 && (
               <>
