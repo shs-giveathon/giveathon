@@ -14,7 +14,7 @@ export const TotalRaised: FC = () => {
     const fetchTotal = async () => {
       try {
         const { data } = await axios.post(fetchLink);
-        setTotal(Number(data).toFixed(2));
+        setTotal(Number(data).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
         console.log('Total:', data);
       } catch (err) {
         console.error('Error fetching total:', err);
@@ -27,7 +27,7 @@ export const TotalRaised: FC = () => {
   return (
     <div className='glass-effect rounded-lg p-4 text-center mx-auto mt-4'>
       <h2 className='text-2xl font-bold mb-2'>Total Raised</h2>
-      <p className='text-7xl'>${total.toLocaleString()}</p>
+      <p className='text-7xl'>${total}</p>
     </div>
   );
 };
