@@ -4,7 +4,7 @@ import isGiveathon from '@/utils/isGiveathon';
 
 const Home: NextPage = () => {
   if (isGiveathon) {
-    return redirect('/leaderboards/users');
+    return redirect('/leaderboards/affiliations');
   } else {
     return (
       <>
