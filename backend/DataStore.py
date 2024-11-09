@@ -335,25 +335,16 @@ class DataStore:
         Registration Sheet Columns:
         Timestamp | Email | Name | Choice | Teacher Period | Club
         """
+        money_form_columns = ["Timestamp", "Email", "Money Raised", "Honesty Statement"]
+        registration_form_columns = ["Timestamp", "Email", "Name", "Choice", "Teacher", "Period", "Club"]
+
         if sheet.title == "MoneyForm":
-            sheet.update(
-                "A1:D1",
-                [["Timestamp", "Email", "Money Raised", "Honesty Statement"]],
-            )
+            current_columns = sheet.row_values(1)
+            if current_columns != money_form_columns:
+                sheet.update("A1:D1", [money_form_columns])
         elif sheet.title == "RegistrationForm":
-            sheet.update(
-                "A1:G1",
-                [
-                    [
-                        "Timestamp",
-                        "Email",
-                        "Name",
-                        "Choice",
-                        "Teacher",
-                        "Period",
-                        "Club",
-                    ]
-                ],
-            )
+            current_columns = sheet.row_values(1)
+            if current_columns != registration_form_columns:
+                sheet.update("A1:G1", [registration_form_columns])
         else:
             raise ValueError("Invalid sheet name provided.")
