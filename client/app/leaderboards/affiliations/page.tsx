@@ -38,10 +38,10 @@ const AffiliationsLeaderboardPage: NextPage = () => {
   if (!data)
     return (
       <>
-        <div className='w-full h-screen pt-16'>
-          <div className='fade-in glass-effect rounded-lg w-1/2 mx-auto font-headers text-center font-bold mt-4 text-2xl md:text-4xl lg:text-6xl'>GiveAThn Leaderboard</div>{' '}
+        <div className='h-screen w-full pt-16'>
+          <div className='fade-in glass-effect font-headers mx-auto mt-4 w-1/2 rounded-lg text-center text-2xl font-bold md:text-4xl lg:text-6xl'>GiveAThn Leaderboard</div>{' '}
           {/* unknown character is unique to this font - for styling purposes only */}
-          <div className='grid place-items-center mt-4'>
+          <div className='mt-4 grid place-items-center'>
             <Image src={loadingSpinner} alt='loading' />
           </div>
         </div>
@@ -50,23 +50,23 @@ const AffiliationsLeaderboardPage: NextPage = () => {
 
   return (
     <>
-      <div className='w-full h-screen pt-16'>
-        <div className='fade-in glass-effect rounded-lg w-1/2 mx-auto font-headers text-center mt-4 text-3xl md:text-4xl lg:text-6xl'>GiveAThon Leaderboard</div>{' '}
+      <div className='h-screen w-full pt-16'>
+        <div className='fade-in glass-effect font-headers mx-auto mt-4 w-1/2 rounded-lg text-center text-3xl md:text-4xl lg:text-6xl'>GiveAThon Leaderboard</div>{' '}
         {/* unknown character is unique to this font - for styling purposes only */}
-        <div className='w-[calc(100%-20px)] mt-4 md:mt-8 md:w-[80%] m-auto grid grid-flow-row gap-2'>
+        <div className='m-auto mt-4 grid w-[calc(100%-20px)] grid-flow-row gap-2 md:mt-8 md:w-[80%]'>
           <Countdown />
           <TotalRaised />
           <RecentDonations />
-          <div className='relative w-full flex gap-[6px] mt-[70px] md:mt-[125px] items-end'>
+          <div className='relative mt-[70px] flex w-full items-end gap-[6px] md:mt-[125px]'>
             {data.length !== 0 && (
               <>
                 {data.length >= 2 && (
-                  <div className='h-[calc(100%+30px)] md:h-[calc(100%+50px)] w-full'>
+                  <div className='h-[calc(100%+30px)] w-full md:h-[calc(100%+50px)]'>
                     <LeaderboardAffilationTop3 name={data[1][0]} moneyRaised={data[1][1]} rank={2} animationDelay={200} />
                   </div>
                 )}
                 {data.length >= 1 && (
-                  <div className='h-[calc(100%+60px)] md:h-[calc(100%+100px)] w-full'>
+                  <div className='h-[calc(100%+60px)] w-full md:h-[calc(100%+100px)]'>
                     <LeaderboardAffilationTop3 name={data[0][0]} moneyRaised={data[0][1]} rank={1} animationDelay={100} />
                   </div>
                 )}

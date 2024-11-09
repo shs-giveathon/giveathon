@@ -25,8 +25,8 @@ export const TotalRaised: FC = () => {
   }, [fetchLink]);
 
   return (
-    <div className='glass-effect rounded-lg p-4 text-center mx-auto mt-4'>
-      <h2 className='text-2xl font-bold mb-2'>Total Raised</h2>
+    <div className='glass-effect mx-auto mt-4 rounded-lg p-4 text-center'>
+      <h2 className='mb-2 text-2xl font-bold'>Total Raised</h2>
       <p className='text-7xl'>${total}</p>
     </div>
   );

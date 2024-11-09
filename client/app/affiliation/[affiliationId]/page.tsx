@@ -35,21 +35,21 @@ const AffiliationIdPage: NextPage = () => {
 
   return (
     <>
-      <div className='w-full h-screen pt-16'>
-        <div className='fade-in glass-effect rounded-lg w-1/2 mx-auto font-headers text-center mt-4 text-3xl xs:text-4xl lg:text-6xl'>GiveAThon Affiliation</div>{' '}
+      <div className='h-screen w-full pt-16'>
+        <div className='fade-in glass-effect font-headers xs:text-4xl mx-auto mt-4 w-1/2 rounded-lg text-center text-3xl lg:text-6xl'>GiveAThon Affiliation</div>{' '}
         <div className='mt-4 grid place-items-center gap-2'>
-          <div className='w-[calc(100%-20px)] md:w-[80%] glass-effect text-center rounded-md p-2 fade-in'>
+          <div className='glass-effect fade-in w-[calc(100%-20px)] rounded-md p-2 text-center md:w-[80%]'>
             <p>{decodeURIComponent(params.affiliationId as string)}</p>
           </div>
           {data ? (
-            <div className='w-[calc(100%-20px)] md:w-[80%] glass-effect text-center rounded-md p-2 fade-in'>
+            <div className='glass-effect fade-in w-[calc(100%-20px)] rounded-md p-2 text-center md:w-[80%]'>
               <p className='text-xl'>Raised ${data.MoneyRaised.toFixed(2)}</p>
               <p>History</p>
               <div>
                 {data.History.map((h: any) => {
                   return (
                     <div className='grid grid-flow-col' key={`${h[0]}-${h[1]}`}>
-                      <div className='grid grid-cols-[max-content_max-content] mr-auto gap-2 place-items-center'>
+                      <div className='mr-auto grid grid-cols-[max-content_max-content] place-items-center gap-2'>
                         <p className='mr-auto font-semibold'>{h[2]}</p>
                         <p className='mr-auto text-sm'>{formatDate(h[0])}</p>
                       </div>

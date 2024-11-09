@@ -34,26 +34,26 @@ export const Countdown: FC = () => {
   });
 
   return (
-    <div className='glass-effect fade-in rounded-md p-2 w-max mx-auto'>
+    <div className='glass-effect fade-in mx-auto w-max rounded-md p-2'>
       <div className='grid grid-flow-col'>
         <div>
           <p className='text-6xl md:text-8xl'>{timeLeft.days}</p>
-          <p className='text-xs sm:text-md text-center'>DAYS</p>
+          <p className='sm:text-md text-center text-xs'>DAYS</p>
         </div>
         <p className='text-6xl md:text-8xl'>:</p>
         <div>
           <p className='text-6xl md:text-8xl'>{timeLeft.hours.toString().padStart(2, '0')}</p>
-          <p className='text-xs sm:text-md text-center'>HOURS</p>
+          <p className='sm:text-md text-center text-xs'>HOURS</p>
         </div>
         <p className='text-6xl md:text-8xl'>:</p>
         <div>
           <p className='text-6xl md:text-8xl'>{timeLeft.minutes.toString().padStart(2, '0')}</p>
-          <p className='text-xs sm:text-md text-center'>MINUTES</p>
+          <p className='sm:text-md text-center text-xs'>MINUTES</p>
         </div>
         <p className='text-6xl md:text-8xl'>:</p>
         <div>
           <p className='text-6xl md:text-8xl'>{timeLeft.seconds.toString().padStart(2, '0')}</p>
-          <p className='text-xs sm:text-md text-center'>SECONDS</p>
+          <p className='sm:text-md text-center text-xs'>SECONDS</p>
         </div>
       </div>
     </div>

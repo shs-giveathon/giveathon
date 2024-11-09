@@ -8,13 +8,13 @@ interface TabsProps {
 
 export const Tabs: FC<TabsProps> = ({ className }) => {
   return (
-    <div className={cn('fade-in glass-effect rounded-lg p-2 grid place-items-center', className)}>
-      <div className='grid grid-flow-col gap-2 w-max place-items-center '>
+    <div className={cn('fade-in glass-effect grid place-items-center rounded-lg p-2', className)}>
+      <div className='grid w-max grid-flow-col place-items-center gap-2 '>
         <Link href='/leaderboards/users'>
-          <button className='bg-gray-500 hover:bg-gray-600 transition py-1 px-2 rounded-md'>Users</button>
+          <button className='rounded-md bg-gray-500 px-2 py-1 transition hover:bg-gray-600'>Users</button>
         </Link>
         <Link href='/leaderboards/affiliations'>
-          <button className='bg-gray-500 hover:bg-gray-600 transition py-1 px-2  rounded-md'>Affiliations</button>
+          <button className='rounded-md bg-gray-500 px-2 py-1 transition  hover:bg-gray-600'>Affiliations</button>
         </Link>
       </div>
     </div>

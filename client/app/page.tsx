@@ -8,11 +8,11 @@ const Home: NextPage = () => {
   } else {
     return (
       <>
-        <div className='w-full h-screen pt-12'>
-          <div className='fade-in glass-effect rounded-lg w-1/2 mx-auto font-headers text-center font-bold mt-4 text-3xl md:text-4xl lg:text-6xl'>GiveAThn 2023</div>{' '}
+        <div className='h-screen w-full pt-12'>
+          <div className='fade-in glass-effect font-headers mx-auto mt-4 w-1/2 rounded-lg text-center text-3xl font-bold md:text-4xl lg:text-6xl'>GiveAThn 2023</div>{' '}
           {/* unknown character is unique to this font - for styling purposes only */}
-          <div className='mt-4 md:mt-8 md:w-[80%] m-auto grid grid-flow-row gap-2'>
-            <div className='glass-effect text-center rounded-md p-4 fade-in'>
+          <div className='m-auto mt-4 grid grid-flow-row gap-2 md:mt-8 md:w-[80%]'>
+            <div className='glass-effect fade-in rounded-md p-4 text-center'>
               <h1 className='text-3xl'>Thank you for participating in Give-A-Thon 2023! This year we...</h1>
               <p className='mt-6 text-2xl'>&bull; helped 306 families</p>
               <p className='mt-2 text-2xl'>&bull; supported 1,189 children with gifts</p>

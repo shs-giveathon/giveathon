@@ -84,20 +84,20 @@ export const AffiliationsComponent: FC = () => {
   if (isLoading) return null;
 
   return (
-    <div className='fade-in glass-effect rounded-lg px-4 text-xl mb-[60px] p-2' style={{ animationDelay: '400ms' }}>
+    <div className='fade-in glass-effect mb-[60px] rounded-lg p-2 px-4 text-xl' style={{ animationDelay: '400ms' }}>
       <div className='my-2'>
         <div className='grid grid-cols-[repeat(3,minmax(0,1fr))] font-bold'>
-          <h1 className='text-md md:text-xl lg:text-2xl mr-auto'>#</h1>
-          <h1 className='text-md md:text-xl lg:text-2xl text-center'>$ Raised</h1>
-          <h1 className='text-md md:text-xl lg:text-2xl ml-auto'>Name</h1>
+          <h1 className='text-md mr-auto md:text-xl lg:text-2xl'>#</h1>
+          <h1 className='text-md text-center md:text-xl lg:text-2xl'>$ Raised</h1>
+          <h1 className='text-md ml-auto md:text-xl lg:text-2xl'>Name</h1>
         </div>
       </div>
       {affiliations.length > 0 ? (
         affiliations.map((affiliation, index) => <LeaderboardAffiliationRow name={affiliation[0]} moneyRaised={affiliation[1]} rank={index + 4} key={index} />)
       ) : (
-        <p className='text-center p-2'>No other affiliations yet!</p>
+        <p className='p-2 text-center'>No other affiliations yet!</p>
       )}
-      <div ref={lastElementRef} className='z-[-1] text-center w-full h-[600px] mt-[-600px]'></div>
+      <div ref={lastElementRef} className='z-[-1] mt-[-600px] h-[600px] w-full text-center'></div>
     </div>
   );
 };
