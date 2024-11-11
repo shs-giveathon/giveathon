@@ -336,7 +336,15 @@ class DataStore:
         Timestamp | Email | Name | Choice | Teacher Period | Club
         """
         money_form_columns = ["Timestamp", "Email", "Money Raised", "Honesty Statement"]
-        registration_form_columns = ["Timestamp", "Email", "Name", "Choice", "Teacher", "Period", "Club"]
+        registration_form_columns = [
+            "Timestamp",
+            "Email",
+            "Name",
+            "Choice",
+            "Teacher",
+            "Period",
+            "Club",
+        ]
 
         if sheet.title == "MoneyForm":
             current_columns = sheet.row_values(1)
