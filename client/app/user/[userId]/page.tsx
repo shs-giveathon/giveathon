@@ -48,7 +48,7 @@ const UserIdPage: NextPage = () => {
                   <ExternalLink className='h-4 w-4' />
                 </div>
               </Link>
-              <p>History</p>
+              <p className='text-xl'>Raised ${data.MoneyRaised.toFixed(2)}</p>
               <div>
                 {data.History.slice()
                   .reverse()

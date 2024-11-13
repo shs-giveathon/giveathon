@@ -47,7 +47,6 @@ const AffiliationIdPage: NextPage = () => {
           {data ? (
             <div className='glass-effect fade-in w-[calc(100%-20px)] rounded-md p-2 text-center md:w-[80%]'>
               <p className='text-xl'>Raised ${data.MoneyRaised.toFixed(2)}</p>
-              <p>History</p>
               <div>
                 {data.History.map((h: any) => {
                   return (

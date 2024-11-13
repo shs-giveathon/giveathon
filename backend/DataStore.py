@@ -199,10 +199,14 @@ class DataStore:
             and str(record.get("Money Raised")).replace(".", "", 1).isdigit()
         ]
 
+        # Calculate the total amount raised
+        totalMoneyRaised: float = sum([h[1] for h in history])
+
         return {
             "Name": name,
             "Affiliation": affiliation,
             "History": history,
+            "MoneyRaised": totalMoneyRaised,
         }
 
     def get_cache(self):
