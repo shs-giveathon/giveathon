@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import loadingSpinner from '@/public/spinner.svg';
 import { formatDate } from '@/utils/formatDate';
+import Link from 'next/link';
 
 interface AffiliationData {
   History: [[string, number, string]];
@@ -36,7 +37,9 @@ const AffiliationIdPage: NextPage = () => {
   return (
     <>
       <div className='h-screen w-full pt-16'>
-        <div className='fade-in glass-effect font-headers xs:text-4xl mx-auto mt-4 w-1/2 rounded-lg text-center text-3xl lg:text-6xl'>GiveAThon Affiliation</div>{' '}
+        <Link href='/'>
+          <div className='fade-in glass-effect font-headers xs:text-4xl mx-auto mt-4 w-1/2 rounded-lg text-center text-3xl lg:text-6xl'>GiveAThon Affiliation</div>
+        </Link>
         <div className='mt-4 grid place-items-center gap-2'>
           <div className='glass-effect fade-in w-[calc(100%-20px)] rounded-md p-2 text-center md:w-[80%]'>
             <p>{decodeURIComponent(params.affiliationId as string)}</p>
