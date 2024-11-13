@@ -117,6 +117,7 @@ class DataStore:
                 "name": registered_emails.get(record.get("Email", ""), {}).get(
                     "Name", "Unknown"
                 ),
+                "email": record.get("Email", ""),
                 "affiliation": registered_emails.get(record.get("Email", ""), {}).get(
                     "Affiliation", "Unregistered"
                 ),

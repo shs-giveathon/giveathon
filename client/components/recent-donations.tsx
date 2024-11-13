@@ -4,11 +4,13 @@ import { FC, useEffect, useState } from 'react';
 import { getApiUrl } from '@/lib/api-url';
 import axios from 'axios';
 import { format } from 'timeago.js';
+import Link from 'next/link';
 
 interface RecentDonation {
   timestamp: string;
   amount: number;
   name: string;
+  email: string;
   affiliation: string;
 }
 
@@ -35,10 +37,14 @@ export const RecentDonations: FC = () => {
       <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
         {donations.map((donation, index) => (
           <div key={index} className='flex items-center justify-between rounded-lg bg-black/20 px-4 py-2'>
-            <div className='flex-1 text-left'>{donation.name}</div>
+            <div className='flex-1 text-left'>
+              <Link href={`/user/${donation.email}`}>{donation.name}</Link>
+            </div>
             <div className='flex-1 text-center'>${donation.amount.toFixed(2)}</div>
             <div className='flex-1 text-right'>
-              <div>{donation.affiliation}</div>
+              <Link href={`/affiliation/${donation.affiliation}`}>
+                <div>{donation.affiliation}</div>
+              </Link>
               <div className='text-sm opacity-50'>{format(donation.timestamp)}</div>
             </div>
           </div>
