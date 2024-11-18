@@ -3,6 +3,7 @@ import './globals.scss';
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 import { Navbar } from '@/components/navbar/navbar';
+import { FathomAnalytics } from './fathom';
 
 const font = Open_Sans({ subsets: ['latin'] });
 
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body dir='ltr' className={cn(font.className, 'text-white')}>
         <div className='bg-hero fixed h-screen w-full bg-cover'></div>
         <Navbar />
+        <FathomAnalytics />
         {children}
       </body>
     </html>
