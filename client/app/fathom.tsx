@@ -9,7 +9,7 @@ function TrackPageView() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    load("RZ0EEZLZ", {
+    load("RZOEEZLZ", {
       auto: false
     });
   }, []);
