@@ -38,13 +38,17 @@ export const RecentDonations: FC = () => {
         {donations.map((donation, index) => (
           <div key={index} className='flex items-center justify-between rounded-lg bg-black/20 px-4 py-2'>
             <div className='flex-1 text-left'>
-              <Link href={`/user/${donation.email}`}>{donation.name}</Link>
+              {donation.name !== 'Unknown' ? <Link href={`/user/${donation.email}`}>{donation.name}</Link> : <span>{donation.name}</span>}
             </div>
             <div className='flex-1 text-center'>${donation.amount.toFixed(2)}</div>
             <div className='flex-1 text-right'>
-              <Link href={`/affiliation/${donation.affiliation}`}>
+              {donation.affiliation !== 'Unregistered' ? (
+                <Link href={`/affiliation/${donation.affiliation}`}>
+                  <div>{donation.affiliation}</div>
+                </Link>
+              ) : (
                 <div>{donation.affiliation}</div>
-              </Link>
+              )}
               <div className='text-sm opacity-50'>{format(donation.timestamp)}</div>
             </div>
           </div>
