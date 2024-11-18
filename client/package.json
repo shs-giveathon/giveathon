@@ -13,6 +13,7 @@
     "axios": "^1.6.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "fathom-client": "^3.7.2",
     "lucide-react": "^0.285.0",
     "million": "^2.6.4",
     "next": "latest",
