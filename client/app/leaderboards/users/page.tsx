@@ -11,6 +11,7 @@ import { Countdown } from '@/components/countdown';
 import { useEffect, useState } from 'react';
 import { TotalRaised } from '@/components/total-raised';
 import { RecentDonations } from '@/components/recent-donations';
+import AdvisoryTop from '@/components/advisory-top';
 
 export type PersonData = [string, { MoneyRaised: number; Name: string }];
 
@@ -56,6 +57,7 @@ const UsersLeaderboardPage: NextPage = () => {
         <div className='m-auto mt-4 grid w-[calc(100%-20px)] grid-flow-row gap-2 md:mt-8 md:w-[80%]'>
           <Countdown />
           <TotalRaised />
+          <AdvisoryTop />
           <RecentDonations />
           <div className='relative mt-[70px] flex w-full items-end gap-[6px] md:mt-[125px]'>
             {data.length !== 0 && (
